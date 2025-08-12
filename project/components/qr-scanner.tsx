@@ -1,12 +1,11 @@
 /**
- * QR Scanner component with dynamic import
- * Componente de scanner QR com importação dinâmica
+ * QR Scanner component with dynamic import (SSR disabled)
+ * Componente de scanner QR com importação dinâmica (SSR desativado)
  */
-
 'use client'
 
+import dynamic from 'next/dynamic'
 import { useState, useCallback } from 'react'
-import { QrScanner } from '@yudiel/react-qr-scanner'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { X, RotateCcw } from 'lucide-react'
@@ -17,22 +16,35 @@ interface QrScannerComponentProps {
   isProcessing?: boolean
 }
 
+// Importa a lib só no client (evita erro no build)
+const QRScanner = dynamic(
+  () =>
+    import('@yudiel/react-qr-scanner').then(m => {
+      // compat com diferentes exports
+      return (m as any).QrScanner || (m as any).QRScanner || (m as any).default
+    }),
+  { ssr: false }
+)
+
 export function QrScannerComponent({ onScan, onClose, isProcessing = false }: QrScannerComponentProps) {
   const [error, setError] = useState<string | null>(null)
   const [hasPermission, setHasPermission] = useState<boolean | null>(null)
 
-  const handleScan = useCallback((result: any) => {
-    if (result && result.text) {
-      onScan(result.text)
-    }
-  }, [onScan])
+  const handleScan = useCallback(
+    (result: any) => {
+      // alguns browsers retornam string direta, outros { text }
+      const text = typeof result === 'string' ? result : result?.text
+      if (text) onScan(text)
+    },
+    [onScan]
+  )
 
-  const handleError = useCallback((error: any) => {
-    console.error('QR Scanner error:', error)
-    if (error.name === 'NotAllowedError') {
+  const handleError = useCallback((err: any) => {
+    console.error('QR Scanner error:', err)
+    if (err?.name === 'NotAllowedError') {
       setError('Permissão de câmera negada. Por favor, permita o acesso à câmera.')
       setHasPermission(false)
-    } else if (error.name === 'NotFoundError') {
+    } else if (err?.name === 'NotFoundError') {
       setError('Nenhuma câmera encontrada no dispositivo.')
     } else {
       setError('Erro ao acessar a câmera. Tente novamente.')
@@ -57,9 +69,7 @@ export function QrScannerComponent({ onScan, onClose, isProcessing = false }: Qr
             <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <X className="w-8 h-8 text-red-600" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              Permissão Necessária
-            </h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Permissão Necessária</h3>
             <p className="text-sm text-gray-600 mb-4">
               {error || 'Precisamos acessar sua câmera para escanear o QR code da nota fiscal.'}
             </p>
@@ -83,24 +93,16 @@ export function QrScannerComponent({ onScan, onClose, isProcessing = false }: Qr
       <Card className="overflow-hidden">
         <CardContent className="p-0">
           <div className="relative">
-            <QrScanner
+            <QRScanner
               onDecode={handleScan}
               onError={handleError}
-              containerStyle={{
-                width: '100%',
-                height: '300px'
-              }}
-              videoStyle={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover'
-              }}
-              constraints={{
-                facingMode: 'environment' // Use back camera
-              }}
+              constraints={{ facingMode: 'environment' }}
+              scanDelay={300}
+              containerStyle={{ width: '100%', height: '300px' }}
+              videoStyle={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
-            
-            {/* Overlay with scanning frame */}
+
+            {/* Overlay com moldura */}
             <div className="absolute inset-0 pointer-events-none">
               <div className="flex items-center justify-center h-full">
                 <div className="w-48 h-48 border-2 border-white rounded-lg relative">
@@ -111,8 +113,8 @@ export function QrScannerComponent({ onScan, onClose, isProcessing = false }: Qr
                 </div>
               </div>
             </div>
-            
-            {/* Close button */}
+
+            {/* Botão fechar */}
             <Button
               variant="ghost"
               size="icon"
@@ -123,13 +125,10 @@ export function QrScannerComponent({ onScan, onClose, isProcessing = false }: Qr
               <X className="w-5 h-5" />
             </Button>
           </div>
-          
+
           <div className="p-4 bg-gray-50 text-center">
             <p className="text-sm text-gray-600">
-              {isProcessing 
-                ? 'Processando QR code...' 
-                : 'Posicione o QR code da nota fiscal dentro do quadro'
-              }
+              {isProcessing ? 'Processando QR code...' : 'Posicione o QR code da nota fiscal dentro do quadro'}
             </p>
           </div>
         </CardContent>
