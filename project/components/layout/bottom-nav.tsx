@@ -2,33 +2,41 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Search, List, Wallet, User } from 'lucide-react'
+import { Home, Search, List, Wallet, User2 } from 'lucide-react'
 
 const items = [
-  { href: '/', label: 'Início', icon: Home },
-  { href: '/buscar', label: 'Buscar', icon: Search },
-  { href: '/lista', label: 'Lista', icon: List },
-  { href: '/gastos', label: 'Controle', icon: Wallet },
-  { href: '/perfil', label: 'Perfil', icon: User },
+  { href: '/', label: 'Início', Icon: Home },
+  { href: '/buscar', label: 'Buscar', Icon: Search },
+  { href: '/lista', label: 'Lista', Icon: List },
+  { href: '/gastos', label: 'Controle', Icon: Wallet },
+  { href: '/perfil', label: 'Perfil', Icon: User2 },
 ]
 
 export default function BottomNav() {
   const pathname = usePathname()
+
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-50 border-t bg-white/90 backdrop-blur">
-      <ul className="mx-auto flex max-w-[480px] items-center justify-between px-4 py-2">
-        {items.map(({ href, label, icon: Icon }) => {
-          const active = pathname === href
+    <nav className="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-t">
+      <ul className="mx-auto flex max-w-md items-stretch justify-between">
+        {items.map(({ href, label, Icon }) => {
+          const active =
+            href === '/'
+              ? pathname === '/'
+              : pathname.startsWith(href)
           return (
-            <li key={href}>
+            <li key={href} className="flex-1">
               <Link
                 href={href}
-                className={`flex flex-col items-center text-xs transition ${
-                  active ? 'text-rose-600' : 'text-slate-600'
+                prefetch
+                aria-current={active ? 'page' : undefined}
+                className={`flex h-16 flex-col items-center justify-center gap-1 text-sm ${
+                  active ? 'text-rose-600' : 'text-gray-600'
                 }`}
               >
-                <Icon size={22} className="mb-1" />
-                {label}
+                <Icon
+                  className={`h-5 w-5 ${active ? 'stroke-rose-600' : 'stroke-gray-600'}`}
+                />
+                <span className="leading-none">{label}</span>
               </Link>
             </li>
           )
