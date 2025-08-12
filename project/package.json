@@ -30,6 +30,10 @@
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
     "zustand": "^4.4.1"
+    "@yudiel/react-qr-scanner": "^2.0.20",
+    "chart.js": "^4.4.4",
+    "react-chartjs-2": "^5.2.0",
+    "react-hot-toast": "^2.4.1"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
