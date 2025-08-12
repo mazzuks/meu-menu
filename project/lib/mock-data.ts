@@ -644,7 +644,7 @@ export const mockRecipes: Recipe[] = [
       if (hasMatch) {
         score += 1
       }
-    })
+    
     
     return { recipe, score }
   })
