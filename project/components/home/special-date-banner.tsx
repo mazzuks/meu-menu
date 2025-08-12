@@ -20,9 +20,9 @@ export function SpecialDateBanner() {
           Ver Receitas
         </Link>
 
-        {/* Exemplo para vídeo; troque por uma URL real se quiser */}
+        {/* rota real em vez de /reels */}
         <Link
-          href="/reels"
+          href="/receitas/churrasco-picanha"
           prefetch
           className="inline-flex items-center rounded-lg border px-3 py-2 text-slate-700"
         >
