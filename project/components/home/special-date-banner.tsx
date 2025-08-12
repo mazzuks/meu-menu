@@ -1,91 +1,39 @@
-'use client'
-
-import { useFoodTheme } from '@/lib/useFoodTheme'
-import { Card, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Play, Calendar } from 'lucide-react'
-import { getRecipesByIds } from '@/lib/mock-data'
+import Link from 'next/link'
+import Image from 'next/image'
 
 export function SpecialDateBanner() {
-  const currentTheme = useFoodTheme()
-
-  if (!currentTheme.active) return null
-
-  const themeRecipes = getRecipesByIds(currentTheme.recipes)
-  const featuredRecipe = themeRecipes[0]
-
   return (
-    <Card 
-      className="mb-6 overflow-hidden border-0 shadow-lg"
-      style={{ 
-        background: `linear-gradient(135deg, ${currentTheme.themeColor}20, ${currentTheme.themeColor}10)`,
-        borderLeft: `4px solid ${currentTheme.themeColor}`
-      }}
-    >
-      <CardContent className="p-0">
-        <div className="relative">
-          {/* Background image */}
-          {featuredRecipe && (
-            <div 
-              className="absolute inset-0 bg-cover bg-center opacity-20"
-              style={{ backgroundImage: `url(${featuredRecipe.image})` }}
-            />
-          )}
-          
-          <div className="relative p-6">
-            <div className="flex items-start gap-4">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <Calendar className="w-4 h-4" style={{ color: currentTheme.themeColor }} />
-                  <span className="text-xs font-medium text-gray-600 uppercase tracking-wide">
-                    Hoje é dia de
-                  </span>
-                </div>
-                
-                <h2 
-                  className="text-xl font-bold mb-2"
-                  style={{ color: currentTheme.themeColor }}
-                >
-                  {currentTheme.title}
-                </h2>
-                
-                <p className="text-sm text-gray-700 mb-4 leading-relaxed">
-                  {featuredRecipe?.description || 'Receitas especiais para esta data!'}
-                </p>
-                
-                <div className="flex gap-2">
-                  <Button 
-                    size="sm" 
-                    className="bg-white text-gray-900 hover:bg-gray-50 border shadow-sm"
-                  >
-                    <Play className="w-3 h-3 mr-1" />
-                    Ver Vídeo
-                  </Button>
-                  
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="border-white/50 text-gray-700 hover:bg-white/10"
-                  >
-                    Ver Receitas
-                  </Button>
-                </div>
-              </div>
-              
-              {/* Featured recipe thumbnail */}
-              {featuredRecipe && (
-                <div className="w-20 h-20 rounded-xl overflow-hidden shadow-md flex-shrink-0">
-                  <img 
-                    src={featuredRecipe.image} 
-                    alt={featuredRecipe.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              )}
-            </div>
-          </div>
+    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-50 to-white p-4 shadow-sm">
+      <div className="max-w-[65%]">
+        <p className="mb-1 text-xs text-slate-500">HOJE É DIA DE</p>
+        <h3 className="mb-2 text-xl font-bold">Dia dos Pais</h3>
+        <p className="mb-4 text-sm text-slate-600">
+          Picanha grelhada no ponto perfeito com farofa e vinagrete
+        </p>
+
+        <div className="flex gap-2">
+          <Link
+            href="/receitas/churrasco-picanha"
+            className="rounded-lg bg-slate-900 px-3 py-2 text-sm text-white"
+          >
+            ▶ Ver Vídeo
+          </Link>
+          <Link
+            href="/receitas"
+            className="rounded-lg border px-3 py-2 text-sm"
+          >
+            Ver Receitas
+          </Link>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+
+      <Image
+        src="https://images.pexels.com/photos/1251208/pexels-photo-1251208.jpeg?auto=compress&cs=tinysrgb&w=800"
+        alt=""
+        width={120}
+        height={120}
+        className="absolute right-3 top-3 rounded-xl object-cover"
+      />
+    </div>
   )
 }
