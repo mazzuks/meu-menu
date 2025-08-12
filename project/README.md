@@ -1,6 +1,6 @@
 # Meu Menu 🤖
 
-Seu assistente culinário inteligente que transforma suas compras em receitas deliciosas!
+Seu assistente culinário inteligente que transforma suas compras em receitas deliciosas!!
 
 ## 🚀 Funcionalidades
 
