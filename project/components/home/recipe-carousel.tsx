@@ -1,34 +1,26 @@
-/**
- * Recipe carousel component
- * Componente de carrossel de receitas
- */
+import Link from 'next/link'
+import Image from 'next/image'
+import type { Recipe } from '@/lib/mock-data'
 
-'use client'
-
-import { RecipeCard } from '@/components/recipe/recipe-card'
-import { Recipe } from '@/lib/mock-data'
-
-interface RecipeCarouselProps {
-  title: string
-  recipes: Recipe[]
-  variant?: 'default' | 'horizontal' | 'large'
-}
-
-export function RecipeCarousel({ title, recipes, variant = 'default' }: RecipeCarouselProps) {
-  if (recipes.length === 0) return null
-
+export function RecipeCarousel({ title, recipes }: { title: string; recipes: Recipe[] }) {
   return (
-    <section className="mb-6">
-      <h2 className="text-lg font-bold text-gray-900 mb-4">{title}</h2>
-      
-      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-        {recipes.map((recipe) => (
-          <div 
-            key={recipe.id} 
-            className={variant === 'large' ? 'min-w-[280px]' : 'min-w-[200px]'}
+    <section className="mt-6">
+      <h3 className="mb-3 text-lg font-semibold">{title}</h3>
+      <div className="flex gap-4 overflow-x-auto pb-2">
+        {recipes.map(r => (
+          <Link
+            key={r.id}
+            href={`/receitas/${r.slug}`}
+            className="min-w-[200px] rounded-xl border bg-white shadow-sm hover:shadow transition"
           >
-            <RecipeCard recipe={recipe} variant={variant} />
-          </div>
+            <div className="relative h-32 w-full overflow-hidden rounded-t-xl">
+              <Image src={r.image} alt={r.title} fill className="object-cover" />
+            </div>
+            <div className="p-3">
+              <p className="line-clamp-2 text-sm font-medium">{r.title}</p>
+              <p className="mt-1 text-xs text-slate-500">{r.prepTime} min • {r.difficulty}</p>
+            </div>
+          </Link>
         ))}
       </div>
     </section>
