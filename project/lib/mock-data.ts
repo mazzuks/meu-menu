@@ -1,3 +1,4 @@
+// components/ui/button.tsx
 "use client";
 
 import * as React from "react";
@@ -16,14 +17,10 @@ function cx(...classes: Array<string | false | null | undefined>) {
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
-  default:
-    "bg-primary text-primary-foreground hover:opacity-90",
-  outline:
-    "border border-input bg-transparent hover:bg-accent",
-  ghost:
-    "bg-transparent hover:bg-accent",
-  link:
-    "bg-transparent underline underline-offset-4 hover:opacity-80",
+  default: "bg-primary text-primary-foreground hover:opacity-90",
+  outline: "border border-input bg-transparent hover:bg-accent",
+  ghost: "bg-transparent hover:bg-accent",
+  link: "bg-transparent underline underline-offset-4 hover:opacity-80",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
