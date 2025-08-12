@@ -1,62 +1,29 @@
-/**
- * Quick actions component
- * Componente de ações rápidas
- */
-
 'use client'
-
 import Link from 'next/link'
-import { ChefHat, List, PiggyBank, Camera } from 'lucide-react'
-import { Card } from '@/components/ui/card'
+import { ChefHat, ListChecks, Wallet, Camera } from 'lucide-react'
 
-const quickActions = [
-  {
-    href: '/receitas',
-    label: 'Receitas',
-    icon: ChefHat,
-    color: 'bg-orange-100 text-orange-600'
-  },
-  {
-    href: '/lista',
-    label: 'Lista de Compras',
-    icon: List,
-    color: 'bg-blue-100 text-blue-600'
-  },
-  {
-    href: '/gastos',
-    label: 'Controle de Gastos',
-    icon: PiggyBank,
-    color: 'bg-yellow-100 text-yellow-600'
-  },
-  {
-    href: '/enviar-nota',
-    label: 'Enviar Nota',
-    icon: Camera,
-    color: 'bg-red-100 text-red-600'
-  }
+const actions = [
+  { href: '/receitas', label: 'Receitas', icon: ChefHat, bg: 'bg-orange-50', dot: 'bg-orange-200' },
+  { href: '/lista', label: 'Lista de Compras', icon: ListChecks, bg: 'bg-blue-50', dot: 'bg-blue-200' },
+  { href: '/gastos', label: 'Controle de Gastos', icon: Wallet, bg: 'bg-yellow-50', dot: 'bg-yellow-200' },
+  { href: '/enviar-nota', label: 'Enviar Nota', icon: Camera, bg: 'bg-rose-50', dot: 'bg-rose-200' },
 ]
 
 export function QuickActions() {
   return (
-    <div className="grid grid-cols-2 gap-3 mb-6">
-      {quickActions.map((action) => {
-        const Icon = action.icon
-        
-        return (
-          <Link key={action.href} href={action.href}>
-            <Card className="p-4 hover:shadow-md transition-shadow">
-              <div className="flex flex-col items-center text-center">
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-3 ${action.color}`}>
-                  <Icon className="w-6 h-6" />
-                </div>
-                <span className="text-sm font-medium text-gray-900 leading-tight">
-                  {action.label}
-                </span>
-              </div>
-            </Card>
-          </Link>
-        )
-      })}
+    <div className="grid grid-cols-2 gap-4">
+      {actions.map(({ href, label, icon: Icon, bg, dot }) => (
+        <Link
+          key={href}
+          href={href}
+          className="rounded-2xl border bg-white p-5 shadow-sm transition hover:shadow"
+        >
+          <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl ${bg}`}>
+            <Icon className={`h-6 w-6 ${dot} rounded-md p-1`} />
+          </div>
+          <p className="text-center text-sm font-medium text-slate-800">{label}</p>
+        </Link>
+      ))}
     </div>
   )
 }
