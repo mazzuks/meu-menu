@@ -1,0 +1,19 @@
+{
+  "pais": "China",
+  "total": 10,
+  "pageSize": 10,
+  "parts": ["part-001.ndjson"],
+  "by_region": {
+    "Pequim": 3,
+    "Sichuan": 2,
+    "Cantão": 2,
+    "Shanghai": 2,
+    "Hunan": 1
+  },
+  "by_category": {
+    "Prato Principal": 6,
+    "Lanche": 3,
+    "Sobremesa": 1
+  },
+  "sample_titles": ["Peking Duck", "Mapo Tofu", "Dim Sum"]
+}

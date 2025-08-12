@@ -1,0 +1,20 @@
+{
+  "pais": "Tailândia",
+  "total": 10,
+  "pageSize": 10,
+  "parts": ["part-001.ndjson"],
+  "by_region": {
+    "Bangkok": 3,
+    "Norte": 2,
+    "Nordeste": 2,
+    "Sul": 2,
+    "Central": 1
+  },
+  "by_category": {
+    "Prato Principal": 6,
+    "Acompanhamento": 2,
+    "Lanche": 1,
+    "Sobremesa": 1
+  },
+  "sample_titles": ["Pad Thai", "Tom Yum Goong", "Green Curry"]
+}

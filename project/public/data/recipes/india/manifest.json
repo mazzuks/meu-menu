@@ -1,0 +1,18 @@
+{
+  "pais": "Índia",
+  "total": 10,
+  "pageSize": 10,
+  "parts": ["part-001.ndjson"],
+  "by_region": {
+    "Norte": 4,
+    "Sul": 3,
+    "Oeste": 2,
+    "Leste": 1
+  },
+  "by_category": {
+    "Prato Principal": 7,
+    "Acompanhamento": 2,
+    "Sobremesa": 1
+  },
+  "sample_titles": ["Butter Chicken", "Biryani", "Dal Tadka"]
+}

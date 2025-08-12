@@ -1,0 +1,25 @@
+{
+  "pais": "Estados Unidos",
+  "total": 1000,
+  "pageSize": 250,
+  "parts": ["part-001.ndjson", "part-002.ndjson", "part-003.ndjson", "part-004.ndjson"],
+  "by_region": {
+    "Sul": 200,
+    "Texas": 200,
+    "Louisiana": 150,
+    "Nova Inglaterra": 120,
+    "Califórnia": 120,
+    "Meio-Oeste": 80,
+    "Noroeste": 70,
+    "Sudoeste": 60,
+    "Havaí": 40
+  },
+  "by_category": {
+    "Prato Principal": 600,
+    "Acompanhamento": 150,
+    "Lanche": 150,
+    "Sobremesa": 80,
+    "Bebida": 20
+  },
+  "sample_titles": ["BBQ Ribs Carolinas", "Brisket Texano", "Tacos al Pastor Texanos"]
+}

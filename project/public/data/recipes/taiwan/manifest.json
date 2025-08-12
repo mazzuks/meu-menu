@@ -1,0 +1,18 @@
+{
+  "pais": "Taiwan",
+  "total": 10,
+  "pageSize": 10,
+  "parts": ["part-001.ndjson"],
+  "by_region": {
+    "Taipei": 4,
+    "Taichung": 2,
+    "Kaohsiung": 2,
+    "Tainan": 2
+  },
+  "by_category": {
+    "Prato Principal": 5,
+    "Lanche": 4,
+    "Sobremesa": 1
+  },
+  "sample_titles": ["Beef Noodle Soup", "Bubble Tea", "Gua Bao"]
+}

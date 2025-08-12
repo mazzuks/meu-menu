@@ -1,0 +1,26 @@
+{
+  "pais": "Argentina",
+  "total": 1000,
+  "pageSize": 250,
+  "parts": ["part-001.ndjson", "part-002.ndjson", "part-003.ndjson", "part-004.ndjson"],
+  "by_region": {
+    "Buenos Aires": 200,
+    "Mendoza": 150,
+    "Córdoba": 120,
+    "Salta": 100,
+    "Patagônia": 100,
+    "Tucumán": 80,
+    "Entre Ríos": 70,
+    "Santa Fe": 60,
+    "Jujuy": 50,
+    "Outros": 70
+  },
+  "by_category": {
+    "Prato Principal": 600,
+    "Acompanhamento": 150,
+    "Lanche": 150,
+    "Sobremesa": 80,
+    "Bebida": 20
+  },
+  "sample_titles": ["Asado Porteño", "Empanadas Mendocinas", "Locro Cordobés"]
+}

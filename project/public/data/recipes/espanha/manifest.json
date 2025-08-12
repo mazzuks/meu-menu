@@ -1,0 +1,26 @@
+{
+  "pais": "Espanha",
+  "total": 1000,
+  "pageSize": 250,
+  "parts": ["part-001.ndjson", "part-002.ndjson", "part-003.ndjson", "part-004.ndjson"],
+  "by_region": {
+    "Valencia": 150,
+    "Andaluzia": 140,
+    "País Vasco": 130,
+    "Catalunha": 120,
+    "Galicia": 110,
+    "Castilla": 100,
+    "Asturias": 80,
+    "Aragón": 70,
+    "Murcia": 60,
+    "Extremadura": 40
+  },
+  "by_category": {
+    "Prato Principal": 600,
+    "Acompanhamento": 150,
+    "Lanche": 150,
+    "Sobremesa": 80,
+    "Bebida": 20
+  },
+  "sample_titles": ["Paella Valenciana", "Gazpacho Andaluz", "Bacalao al Pil Pil"]
+}
