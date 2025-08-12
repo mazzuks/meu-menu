@@ -1,4 +1,9 @@
-// Recomenda receitas pelos ingredientes selecionados
+// --- dados simulados ---
+export const mockRecipes = [
+  // ...suas receitas
+]
+
+// --- função para recomendar receitas ---
 export function getTopRecipesByIngredients(selected: string[], maxResults = 10) {
   const selectedLower = (selected || []).map(s => s.trim().toLowerCase());
 
@@ -7,7 +12,7 @@ export function getTopRecipesByIngredients(selected: string[], maxResults = 10) 
     const recipeIngs = (recipe.ingredients || []).map((i: string) => i.trim().toLowerCase());
     const matches = selectedLower.filter(s => recipeIngs.includes(s)).length;
 
-    // regra simples de pontuação (ajuste se quiser)
+    // regra simples de pontuação
     const score = matches;
 
     return { recipe, score };
@@ -20,3 +25,12 @@ export function getTopRecipesByIngredients(selected: string[], maxResults = 10) 
     .slice(0, maxResults)
     .map(item => item.recipe);
 }
+
+// --- outros mocks ---
+export const mockShoppingList = [
+  // ...
+]
+
+export const mockExpenses = [
+  // ...
+]
