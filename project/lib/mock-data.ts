@@ -7,12 +7,31 @@ export type Ingredient = {
   unit: string;
 };
 
+<<<<<<< HEAD
 export type Nutrition = {
   calories: number;
   protein: number;
   carbs: number;
   fat: number;
 };
+=======
+export interface Ingredient {
+  id: string
+  name: string
+  amount: string
+  unit: string
+}
+
+export interface ShoppingListItem {
+  id: string
+  name: string
+  amount: string
+  unit: string
+  category: string
+  purchased: boolean
+  recipeId?: string
+}
+>>>>>>> dan/wip-2025-08-12
 
 export type Recipe = {
   id: string;
@@ -346,7 +365,27 @@ export const mockRecipes: Recipe[] = [
   }
 ];
 
+<<<<<<< HEAD
 export default mockRecipes;
+=======
+// Mock shopping list data / Dados mockados da lista de compras
+export const mockShoppingList: ShoppingListItem[] = [
+  { id: '1', name: 'Tomate', amount: '1', unit: 'kg', category: 'Hortifruti', purchased: false },
+  { id: '2', name: 'Cebola', amount: '500', unit: 'g', category: 'Hortifruti', purchased: true },
+  { id: '3', name: 'Arroz', amount: '1', unit: 'kg', category: 'Grãos', purchased: false },
+  { id: '4', name: 'Frango', amount: '1', unit: 'kg', category: 'Carnes', purchased: false },
+  { id: '5', name: 'Leite', amount: '1', unit: 'litro', category: 'Laticínios', purchased: true }
+]
+
+// Mock expenses data / Dados mockados de gastos
+export const mockExpenses: Expense[] = [
+  { id: '1', description: 'Supermercado ABC', amount: 127.50, category: 'Alimentação', date: '2025-01-02' },
+  { id: '2', description: 'Padaria do João', amount: 15.80, category: 'Padaria', date: '2025-01-02' },
+  { id: '3', description: 'Feira livre', amount: 45.20, category: 'Hortifruti', date: '2025-01-01' },
+  { id: '4', description: 'Açougue Central', amount: 89.90, category: 'Carnes', date: '2024-12-30' },
+  { id: '5', description: 'Mercado XYZ', amount: 203.45, category: 'Alimentação', date: '2024-12-28' }
+]
+>>>>>>> dan/wip-2025-08-12
 
 // ===== Tipos auxiliares =====
 export type Expense = {
@@ -391,3 +430,39 @@ export function getRecipesByIds(ids: string[]) {
   const set = new Set(ids);
   return mockRecipes.filter((r) => set.has(r.id));
 }
+<<<<<<< HEAD
+=======
+
+export const getRecipeBySlug = (slug: string): Recipe | null => {
+  return mockRecipes.find(recipe => recipe.slug === slug) || null
+}
+
+export const consolidateIngredients = (recipeIds: string[]): ShoppingListItem[] => {
+  const recipes = getRecipesByIds(recipeIds)
+  const ingredientMap = new Map<string, ShoppingListItem>()
+  
+  recipes.forEach(recipe => {
+    recipe.ingredients.forEach(ingredient => {
+      const key = ingredient.name.toLowerCase()
+      
+      if (ingredientMap.has(key)) {
+        const existing = ingredientMap.get(key)!
+        // Simple consolidation - in real app would handle unit conversion
+        existing.amount = `${existing.amount} + ${ingredient.amount}`
+      } else {
+        ingredientMap.set(key, {
+          id: `${recipe.id}-${ingredient.id}`,
+          name: ingredient.name,
+          amount: ingredient.amount,
+          unit: ingredient.unit,
+          category: 'Diversos', // Would categorize properly in real app
+          purchased: false,
+          recipeId: recipe.id
+        })
+      }
+    })
+  })
+  
+  return Array.from(ingredientMap.values())
+}
+>>>>>>> dan/wip-2025-08-12

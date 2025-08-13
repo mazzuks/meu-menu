@@ -19,7 +19,14 @@ export default function BottomNav() {
     <nav className="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-t">
       <ul className="mx-auto flex max-w-md items-stretch justify-between">
         {items.map(({ href, label, Icon }) => {
+<<<<<<< HEAD
           const active = href === '/' ? pathname === '/' : pathname.startsWith(href)
+=======
+          const active =
+            href === '/'
+              ? pathname === '/'
+              : pathname.startsWith(href)
+>>>>>>> dan/wip-2025-08-12
           return (
             <li key={href} className="flex-1">
               <Link
@@ -30,7 +37,13 @@ export default function BottomNav() {
                   active ? 'text-rose-600' : 'text-gray-600'
                 }`}
               >
+<<<<<<< HEAD
                 <Icon className={`h-5 w-5 ${active ? 'stroke-rose-600' : 'stroke-gray-600'}`} />
+=======
+                <Icon
+                  className={`h-5 w-5 ${active ? 'stroke-rose-600' : 'stroke-gray-600'}`}
+                />
+>>>>>>> dan/wip-2025-08-12
                 <span className="leading-none">{label}</span>
               </Link>
             </li>
