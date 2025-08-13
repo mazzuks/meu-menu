@@ -5,7 +5,7 @@ import { ChefHat, ListChecks, Wallet, Camera } from 'lucide-react'
 
 const actions = [
   { href: '/receitas',      label: 'Receitas',         Icon: ChefHat,   bg: 'bg-orange-100', dot: 'bg-orange-600' },
-  { href: '/lista',         label: 'Lista de Compras', Icon: ListChecks,bg: 'bg-blue-100',   dot: 'bg-blue-600' },
+  { href: '/lista',         label: 'Lista de Compras', Icon: ListChecks,bg: 'bg-blue-100',   dot: 'bg-green-600' },
   { href: '/gastos',        label: 'Controle de Gastos', Icon: Wallet,  bg: 'bg-yellow-100', dot: 'bg-yellow-600' },
   { href: '/enviar-nota',   label: 'Enviar Nota',      Icon: Camera,    bg: 'bg-rose-100',   dot: 'bg-rose-600' },
 ]
