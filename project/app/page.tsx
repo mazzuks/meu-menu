@@ -9,6 +9,20 @@ import { PromotionsCarousel } from '@/components/home/promotions-carousel'
 import { mockRecipes } from '@/lib/mock-data'
 import BottomNav from '@/components/layout/bottom-nav'
 
+<h2 className="px-4 text-lg font-semibold mb-2">Rápidas</h2>
+<RecipeCarousel recipes={quickRecipes} />
+
+<h2 className="px-4 text-lg font-semibold mb-2 mt-4">Italiana</h2>
+<RecipeCarousel recipes={italianRecipes} />
+
+<h2 className="px-4 text-lg font-semibold mb-2 mt-4">Brasileira</h2>
+<RecipeCarousel recipes={brazilianRecipes} />
+
+<h2 className="px-4 text-lg font-semibold mb-2 mt-4">Doces</h2>
+<RecipeCarousel recipes={dessertRecipes} />
+
+
+
 export default function HomePage() {
   // Filter recipes by category for carousels
   const italianRecipes   = mockRecipes.filter(r => r.category === 'Italiana').slice(0, 6)
