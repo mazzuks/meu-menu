@@ -1,10 +1,17 @@
-// project/components/layout/bottom-nav.tsx
 'use client'
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ROUTES } from '@/project/lib/routes' // ajuste o alias se seu tsconfig usa @/
 import { Home, Search, ListChecks, ChefHat, User } from 'lucide-react'
+
+const ROUTES = {
+  HOME: '/',
+  RECEITAS: '/receitas',
+  LISTA: '/lista',
+  BUSCAR: '/buscar',
+  PROMOCOES: '/promocoes',
+  PERFIL: '/perfil', // ajuste para /login se preferir
+}
 
 type Item = {
   href: string
