@@ -3,11 +3,12 @@
 import { Header } from '@/components/layout/header'
 import { QuickActions } from '@/components/home/quick-actions'
 import { RecipeCarousel } from '@/components/home/recipe-carousel'
-import SpecialDateBanner from '@/components/home/special-date-banner' // import corrigido
+import SpecialDateBanner from '@/components/home/special-date-banner'
 import { PromotionsCarousel } from '@/components/home/promotions-carousel'
 import { ReelsCarousel } from '@/components/home/reels-carousel'
 import { mockRecipes } from '@/lib/mock-data'
 import BottomNav from '@/components/layout/bottom-nav'
+import { LinkOverlay } from '@/components/ui/LinkOverlay' // <— adicionado
 
 export default function HomePage() {
   // Filtra receitas por categoria para os carrosséis
@@ -19,21 +20,23 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
       <Header />
-      
+
       <div className="px-4 pb-6">
         <div className="max-w-md mx-auto">
-          {/* Banner do dia */}
-          <SpecialDateBanner />
-          
-          {/* Ações rápidas */}
+          {/* Banner do dia — fica clicável sem mudar layout */}
+          <LinkOverlay href="/buscar" ariaLabel="Ir para Buscar">
+            <SpecialDateBanner />
+          </LinkOverlay>
+
+          {/* Ações rápidas (arquivo abaixo já deixa cada botão clicável) */}
           <QuickActions />
-          
+
           {/* Promoções */}
           <PromotionsCarousel />
-          
+
           {/* Reels */}
           <ReelsCarousel />
-          
+
           {/* Carrosséis de receitas */}
           <RecipeCarousel title="Receitas Rápidas" recipes={quickRecipes} />
           <RecipeCarousel title="Culinária Italiana" recipes={italianRecipes} />
@@ -41,7 +44,7 @@ export default function HomePage() {
           <RecipeCarousel title="Doces & Sobremesas" recipes={dessertRecipes} />
         </div>
       </div>
-      
+
       <BottomNav />
     </div>
   )
