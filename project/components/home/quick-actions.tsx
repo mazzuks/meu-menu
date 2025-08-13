@@ -3,7 +3,6 @@
 import Link from 'next/link'
 
 export function QuickActions() {
-  // mantém as MESMAS classes/estilo que você já usava nos cards/botões
   const base =
     'rounded-xl p-4 shadow-sm border bg-white hover:bg-gray-50 active:scale-[0.98] transition select-none'
 
