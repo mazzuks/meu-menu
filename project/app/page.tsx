@@ -32,9 +32,7 @@ export default function HomePage() {
           {/* Promotions carousel */}
           <PromotionsCarousel />
           
-          {/* Reels carousel */}
-          <ReelsCarousel />
-          
+         
           {/* Recipe carousels */}
           <RecipeCarousel 
             title="Receitas Rápidas" 
