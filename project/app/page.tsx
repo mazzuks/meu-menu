@@ -1,13 +1,14 @@
 'use client'
 
+
 import { Header } from '@/components/layout/header'
 import { QuickActions } from '@/components/home/quick-actions'
-// import { RecipeCarousel } from '@/components/home/recipe-carousel' *//
+import { RecipeCarousel } from '@/components/home/recipe-carousel'
 import { SpecialDateBanner } from '@/components/home/special-date-banner'
 import { PromotionsCarousel } from '@/components/home/promotions-carousel'
-import { ReelsCarousel } from '@/components/home/reels-carousel'
 import { mockRecipes } from '@/lib/mock-data'
 import BottomNav from '@/components/layout/bottom-nav'
+
 
 export default function HomePage() {
   // Filter recipes by category for carousels
