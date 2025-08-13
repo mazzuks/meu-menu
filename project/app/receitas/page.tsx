@@ -7,7 +7,7 @@ export default function RecipesIndex() {
       <h1 className="text-2xl font-semibold mb-4">Receitas</h1>
       <div className="grid grid-cols-2 gap-3">
         {mockRecipes.map((r) => (
-          <RecipeCard key={r.id} recipe={r} />
+          <RecipeCard key={r.id} recipe={r} fill />
         ))}
       </div>
     </main>
