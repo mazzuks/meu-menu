@@ -1,20 +1,29 @@
-// lib/mock-data.ts
+/**
+ * Mock data for Meu Menu app
+ * Dados mockados para o app Meu Menu
+ */
 
-export type Ingredient = {
-  id: string;
-  name: string;
-  amount: string; // manter como string: '2', '300', '1.5' etc.
-  unit: string;
-};
+export interface Recipe {
+  id: string
+  slug: string
+  title: string
+  description: string
+  image: string
+  prepTime: number // minutes / minutos
+  difficulty: 'Fácil' | 'Médio' | 'Difícil'
+  servings: number
+  category: string
+  tags: string[]
+  ingredients: Ingredient[]
+  instructions: string[]
+  nutrition?: {
+    calories: number
+    protein: number
+    carbs: number
+    fat: number
+  }
+}
 
-<<<<<<< HEAD
-export type Nutrition = {
-  calories: number;
-  protein: number;
-  carbs: number;
-  fat: number;
-};
-=======
 export interface Ingredient {
   id: string
   name: string
@@ -31,343 +40,597 @@ export interface ShoppingListItem {
   purchased: boolean
   recipeId?: string
 }
->>>>>>> dan/wip-2025-08-12
 
-export type Recipe = {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  image: string;
-  prepTime: number;
-  difficulty: 'Fácil' | 'Médio' | 'Difícil' | string;
-  servings: number;
-  category: string;
-  tags: string[];
-  ingredients: Ingredient[];
-  instructions: string[];
-  nutrition: Nutrition;
-};
+export interface Expense {
+  id: string
+  description: string
+  amount: number
+  category: string
+  date: string
+}
 
-// ---> SEUS ITENS (21–32) <---
+// Mock recipes data / Dados mockados de receitas (20 receitas completas)
 export const mockRecipes: Recipe[] = [
   {
-    id: '21',
-    slug: 'bibimbap',
-    title: 'Bibimbap',
-    description: 'Arroz coreano com legumes, carne e gochujang',
-    image: 'https://images.pexels.com/photos/2067420/pexels-photo-2067420.jpeg?auto=compress&cs=tinysrgb&w=800',
-    prepTime: 40,
-    difficulty: 'Médio',
-    servings: 2,
-    category: 'Coreana',
-    tags: ['coreana', 'arroz', 'picante', 'legumes'],
-    ingredients: [
-      { id: '1', name: 'Arroz cozido', amount: '2', unit: 'xícaras' },
-      { id: '2', name: 'Legumes sortidos', amount: '300', unit: 'g' },
-      { id: '3', name: 'Carne bovina fatiada', amount: '200', unit: 'g' },
-      { id: '4', name: 'Gochujang', amount: '2', unit: 'colheres' }
-    ],
-    instructions: [
-      'Salteie os legumes e a carne separadamente',
-      'Monte o bowl com arroz por baixo',
-      'Distribua legumes e carne por cima',
-      'Finalize com gochujang e ovo frito',
-      'Misture tudo ao servir'
-    ],
-    nutrition: { calories: 520, protein: 26, carbs: 68, fat: 16 }
-  },
-  {
-    id: '22',
-    slug: 'kimchi-jjigae',
-    title: 'Kimchi Jjigae',
-    description: 'Ensopado coreano de kimchi com tofu',
-    image: 'https://images.pexels.com/photos/4198023/pexels-photo-4198023.jpeg?auto=compress&cs=tinysrgb&w=800',
-    prepTime: 30,
-    difficulty: 'Médio',
-    servings: 4,
-    category: 'Coreana',
-    tags: ['ensopado', 'tofu', 'kimchi'],
-    ingredients: [
-      { id: '1', name: 'Kimchi', amount: '2', unit: 'xícaras' },
-      { id: '2', name: 'Tofu firme', amount: '300', unit: 'g' },
-      { id: '3', name: 'Caldo', amount: '600', unit: 'ml' },
-      { id: '4', name: 'Cebolinha', amount: '2', unit: 'unidades' }
-    ],
-    instructions: [
-      'Refogue o kimchi',
-      'Adicione o caldo e ferva',
-      'Junte o tofu em cubos',
-      'Cozinhe por 10 minutos',
-      'Finalize com cebolinha'
-    ],
-    nutrition: { calories: 210, protein: 14, carbs: 14, fat: 10 }
-  },
-  {
-    id: '23',
-    slug: 'asado-argentino',
-    title: 'Asado Argentino',
-    description: 'Grelhados variados no estilo argentino',
-    image: 'https://images.pexels.com/photos/675951/pexels-photo-675951.jpeg?auto=compress&cs=tinysrgb&w=800',
-    prepTime: 120,
-    difficulty: 'Difícil',
-    servings: 6,
-    category: 'Argentina',
-    tags: ['churrasco', 'carne', 'parrilla'],
-    ingredients: [
-      { id: '1', name: 'Cortes bovinos', amount: '1.5', unit: 'kg' },
-      { id: '2', name: 'Sal grosso', amount: '2', unit: 'colheres' },
-      { id: '3', name: 'Linguiça', amount: '400', unit: 'g' },
-      { id: '4', name: 'Chimichurri', amount: '4', unit: 'colheres' }
-    ],
-    instructions: [
-      'Acenda a brasa e estabilize o calor',
-      'Tempere a carne com sal',
-      'Grelhe lentamente os cortes',
-      'Pincele chimichurri ao final',
-      'Descanse e sirva'
-    ],
-    nutrition: { calories: 680, protein: 55, carbs: 4, fat: 48 }
-  },
-  {
-    id: '24',
-    slug: 'empanadas-saltenas',
-    title: 'Empanadas Salteñas',
-    description: 'Empanadas argentinas recheadas de carne',
-    image: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=800',
-    prepTime: 60,
-    difficulty: 'Médio',
-    servings: 4,
-    category: 'Argentina',
-    tags: ['empanada', 'forno'],
-    ingredients: [
-      { id: '1', name: 'Massa para empanada', amount: '12', unit: 'discos' },
-      { id: '2', name: 'Carne moída', amount: '400', unit: 'g' },
-      { id: '3', name: 'Cebola', amount: '1', unit: 'unidade' },
-      { id: '4', name: 'Ovos cozidos', amount: '2', unit: 'unidades' }
-    ],
-    instructions: [
-      'Refogue carne e cebola',
-      'Recheie os discos',
-      'Feche e pincele ovo',
-      'Asse até dourar',
-      'Sirva quente'
-    ],
-    nutrition: { calories: 460, protein: 22, carbs: 44, fat: 22 }
-  },
-  {
-    id: '25',
-    slug: 'mapo-tofu',
-    title: 'Mapo Tofu',
-    description: 'Tofu apimentado com carne moída ao estilo Sichuan',
-    image: 'https://images.pexels.com/photos/4198029/pexels-photo-4198029.jpeg?auto=compress&cs=tinysrgb&w=800',
-    prepTime: 25,
-    difficulty: 'Médio',
-    servings: 4,
-    category: 'Chinesa',
-    tags: ['tofu', 'picante', 'sichuan'],
-    ingredients: [
-      { id: '1', name: 'Tofu macio', amount: '400', unit: 'g' },
-      { id: '2', name: 'Carne moída', amount: '200', unit: 'g' },
-      { id: '3', name: 'Doubanjiang', amount: '1', unit: 'colher' },
-      { id: '4', name: 'Caldo', amount: '300', unit: 'ml' }
-    ],
-    instructions: [
-      'Refogue a carne com doubanjiang',
-      'Adicione caldo',
-      'Junte o tofu e aqueça sem quebrar',
-      'Engrosse levemente',
-      'Sirva com cebolinha'
-    ],
-    nutrition: { calories: 320, protein: 22, carbs: 14, fat: 18 }
-  },
-  {
-    id: '26',
-    slug: 'chow-mein-franco',
-    title: 'Chow Mein de Frango',
-    description: 'Macarrão frito chinês com legumes e frango',
-    image: 'https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg?auto=compress&cs=tinysrgb&w=800',
-    prepTime: 20,
-    difficulty: 'Fácil',
-    servings: 3,
-    category: 'Chinesa',
-    tags: ['massa', 'wok', 'rápido'],
-    ingredients: [
-      { id: '1', name: 'Macarrão para yakisoba', amount: '250', unit: 'g' },
-      { id: '2', name: 'Frango em tiras', amount: '250', unit: 'g' },
-      { id: '3', name: 'Legumes fatiados', amount: '300', unit: 'g' },
-      { id: '4', name: 'Molho de soja', amount: '2', unit: 'colheres' }
-    ],
-    instructions: [
-      'Cozinhe o macarrão',
-      'Salteie frango e legumes',
-      'Junte o macarrão e tempere',
-      'Salteie rápido e sirva',
-      'Finalize com gergelim'
-    ],
-    nutrition: { calories: 430, protein: 26, carbs: 58, fat: 12 }
-  },
-  {
-    id: '27',
-    slug: 'bacalhau-bras',
-    title: 'Bacalhau à Brás',
-    description: 'Clássico português de bacalhau desfiado com batata e ovos',
-    image: 'https://images.pexels.com/photos/1199957/pexels-photo-1199957.jpeg?auto=compress&cs=tinysrgb&w=800',
-    prepTime: 35,
-    difficulty: 'Médio',
-    servings: 4,
-    category: 'Portuguesa',
-    tags: ['bacalhau', 'portuguesa'],
-    ingredients: [
-      { id: '1', name: 'Bacalhau dessalgado', amount: '400', unit: 'g' },
-      { id: '2', name: 'Batata palha', amount: '200', unit: 'g' },
-      { id: '3', name: 'Ovos', amount: '4', unit: 'unidades' },
-      { id: '4', name: 'Cebola', amount: '1', unit: 'unidade' }
-    ],
-    instructions: [
-      'Refogue cebola e bacalhau',
-      'Adicione batata palha',
-      'Junte ovos mexendo',
-      'Acerte o sal',
-      'Finalize com salsinha'
-    ],
-    nutrition: { calories: 510, protein: 34, carbs: 32, fat: 24 }
-  },
-  {
-    id: '28',
-    slug: 'pastel-de-nata',
-    title: 'Pastel de Nata',
-    description: 'Doce português com creme e massa folhada',
-    image: 'https://images.pexels.com/photos/461426/pexels-photo-461426.jpeg?auto=compress&cs=tinysrgb&w=800',
+    id: '1',
+    slug: 'pizza-margherita',
+    title: 'Pizza Margherita',
+    description: 'Pizza clássica italiana com molho de tomate, mussarela e manjericão fresco',
+    image: 'https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&cs=tinysrgb&w=800',
     prepTime: 45,
     difficulty: 'Médio',
-    servings: 6,
-    category: 'Portuguesa',
-    tags: ['doce', 'sobremesa'],
+    servings: 4,
+    category: 'Italiana',
+    tags: ['pizza', 'italiana', 'vegetariana'],
     ingredients: [
-      { id: '1', name: 'Massa folhada', amount: '1', unit: 'rolo' },
-      { id: '2', name: 'Leite', amount: '500', unit: 'ml' },
-      { id: '3', name: 'Gemas', amount: '6', unit: 'unidades' },
-      { id: '4', name: 'Açúcar', amount: '150', unit: 'g' }
+      { id: '1', name: 'Massa de pizza', amount: '1', unit: 'unidade' },
+      { id: '2', name: 'Molho de tomate', amount: '200', unit: 'ml' },
+      { id: '3', name: 'Mussarela', amount: '200', unit: 'g' },
+      { id: '4', name: 'Manjericão fresco', amount: '10', unit: 'folhas' },
+      { id: '5', name: 'Azeite', amount: '2', unit: 'colheres de sopa' }
     ],
     instructions: [
-      'Forre as forminhas com massa',
-      'Prepare o creme',
-      'Preencha as formas',
-      'Asse até dourar',
-      'Sirva com canela'
+      'Pré-aqueça o forno a 220°C',
+      'Abra a massa de pizza em uma forma untada',
+      'Espalhe o molho de tomate uniformemente',
+      'Adicione a mussarela por toda a pizza',
+      'Leve ao forno por 15-20 minutos até dourar',
+      'Retire do forno e adicione o manjericão fresco',
+      'Regue com azeite e sirva quente'
     ],
-    nutrition: { calories: 320, protein: 7, carbs: 38, fat: 15 }
+    nutrition: { calories: 280, protein: 12, carbs: 35, fat: 8 }
   },
   {
-    id: '29',
-    slug: 'salada-grega',
-    title: 'Salada Grega',
-    description: 'Tomate, pepino, azeitonas, cebola roxa e queijo feta',
-    image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800',
+    id: '2',
+    slug: 'sopa-abobora',
+    title: 'Sopa de Abóbora',
+    description: 'Sopa cremosa e nutritiva de abóbora com gengibre',
+    image: 'https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 30,
+    difficulty: 'Fácil',
+    servings: 4,
+    category: 'Brasileira',
+    tags: ['sopa', 'saudável', 'vegetariana'],
+    ingredients: [
+      { id: '1', name: 'Abóbora', amount: '500', unit: 'g' },
+      { id: '2', name: 'Cebola', amount: '1', unit: 'unidade' },
+      { id: '3', name: 'Gengibre', amount: '1', unit: 'cm' },
+      { id: '4', name: 'Caldo de legumes', amount: '500', unit: 'ml' },
+      { id: '5', name: 'Creme de leite', amount: '100', unit: 'ml' }
+    ],
+    instructions: [
+      'Descasque e corte a abóbora em cubos',
+      'Refogue a cebola e o gengibre',
+      'Adicione a abóbora e o caldo',
+      'Cozinhe por 20 minutos até amolecer',
+      'Bata no liquidificador até ficar cremoso',
+      'Volte à panela, adicione o creme de leite',
+      'Tempere com sal e pimenta a gosto'
+    ],
+    nutrition: { calories: 120, protein: 3, carbs: 18, fat: 4 }
+  },
+  {
+    id: '3',
+    slug: 'churrasco-picanha',
+    title: 'Churrasco de Picanha',
+    description: 'Picanha grelhada no ponto perfeito com farofa e vinagrete',
+    image: 'https://images.pexels.com/photos/1251208/pexels-photo-1251208.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 60,
+    difficulty: 'Médio',
+    servings: 6,
+    category: 'Brasileira',
+    tags: ['churrasco', 'carne', 'fim de semana'],
+    ingredients: [
+      { id: '1', name: 'Picanha', amount: '1', unit: 'kg' },
+      { id: '2', name: 'Sal grosso', amount: '3', unit: 'colheres de sopa' },
+      { id: '3', name: 'Farinha de mandioca', amount: '200', unit: 'g' },
+      { id: '4', name: 'Tomate', amount: '3', unit: 'unidades' },
+      { id: '5', name: 'Cebola roxa', amount: '1', unit: 'unidade' }
+    ],
+    instructions: [
+      'Tempere a picanha com sal grosso 30 min antes',
+      'Acenda o carvão e espere formar brasas',
+      'Grelhe a picanha por 15 min de cada lado',
+      'Prepare a farofa refogando a farinha',
+      'Corte tomate e cebola para o vinagrete',
+      'Deixe a carne descansar 5 minutos',
+      'Corte em fatias e sirva com acompanhamentos'
+    ],
+    nutrition: { calories: 420, protein: 35, carbs: 5, fat: 28 }
+  },
+  {
+    id: '4',
+    slug: 'brigadeiro-gourmet',
+    title: 'Brigadeiro Gourmet',
+    description: 'Brigadeiro cremoso com chocolate belga e granulado especial',
+    image: 'https://images.pexels.com/photos/1055272/pexels-photo-1055272.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 20,
+    difficulty: 'Fácil',
+    servings: 20,
+    category: 'Doces',
+    tags: ['doce', 'chocolate', 'festa'],
+    ingredients: [
+      { id: '1', name: 'Leite condensado', amount: '1', unit: 'lata' },
+      { id: '2', name: 'Chocolate em pó', amount: '3', unit: 'colheres de sopa' },
+      { id: '3', name: 'Manteiga', amount: '1', unit: 'colher de sopa' },
+      { id: '4', name: 'Granulado', amount: '100', unit: 'g' }
+    ],
+    instructions: [
+      'Misture leite condensado, chocolate e manteiga',
+      'Leve ao fogo baixo mexendo sempre',
+      'Cozinhe até desgrudar do fundo da panela',
+      'Deixe esfriar completamente',
+      'Faça bolinhas com as mãos untadas',
+      'Passe no granulado',
+      'Coloque em forminhas e sirva'
+    ],
+    nutrition: { calories: 85, protein: 1, carbs: 12, fat: 3 }
+  },
+  {
+    id: '5',
+    slug: 'feijoada-completa',
+    title: 'Feijoada Completa',
+    description: 'Feijoada tradicional brasileira com todos os acompanhamentos',
+    image: 'https://images.pexels.com/photos/5737241/pexels-photo-5737241.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 180,
+    difficulty: 'Difícil',
+    servings: 8,
+    category: 'Brasileira',
+    tags: ['feijoada', 'tradicional', 'fim de semana'],
+    ingredients: [
+      { id: '1', name: 'Feijão preto', amount: '500', unit: 'g' },
+      { id: '2', name: 'Linguiça calabresa', amount: '300', unit: 'g' },
+      { id: '3', name: 'Costela de porco', amount: '400', unit: 'g' },
+      { id: '4', name: 'Bacon', amount: '200', unit: 'g' },
+      { id: '5', name: 'Cebola', amount: '2', unit: 'unidades' },
+      { id: '6', name: 'Alho', amount: '4', unit: 'dentes' }
+    ],
+    instructions: [
+      'Deixe o feijão de molho na véspera',
+      'Cozinhe o feijão até ficar macio',
+      'Refogue as carnes em panela separada',
+      'Junte as carnes ao feijão',
+      'Tempere com cebola, alho e louro',
+      'Cozinhe por mais 1 hora em fogo baixo',
+      'Sirva com arroz, couve e farofa'
+    ],
+    nutrition: { calories: 380, protein: 25, carbs: 28, fat: 18 }
+  },
+  {
+    id: '6',
+    slug: 'salada-caesar',
+    title: 'Salada Caesar',
+    description: 'Salada clássica com alface, croutons e molho caesar',
+    image: 'https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=800',
     prepTime: 15,
     difficulty: 'Fácil',
     servings: 4,
-    category: 'Mediterrânea',
-    tags: ['salada', 'feta', 'azeitonas'],
+    category: 'Saladas',
+    tags: ['salada', 'saudável', 'rápido'],
     ingredients: [
-      { id: '1', name: 'Tomate', amount: '2', unit: 'unidades' },
-      { id: '2', name: 'Pepino', amount: '1', unit: 'unidade' },
-      { id: '3', name: 'Azeitonas', amount: '80', unit: 'g' },
-      { id: '4', name: 'Queijo feta', amount: '100', unit: 'g' }
+      { id: '1', name: 'Alface americana', amount: '1', unit: 'pé' },
+      { id: '2', name: 'Parmesão', amount: '100', unit: 'g' },
+      { id: '3', name: 'Croutons', amount: '100', unit: 'g' },
+      { id: '4', name: 'Molho caesar', amount: '100', unit: 'ml' }
     ],
     instructions: [
-      'Corte os legumes',
-      'Misture com azeite e orégano',
-      'Adicione o feta',
-      'Acerte o sal',
-      'Sirva fresca'
+      'Lave e corte a alface em pedaços',
+      'Rale o queijo parmesão',
+      'Misture a alface com o molho',
+      'Adicione os croutons',
+      'Polvilhe o parmesão por cima',
+      'Sirva imediatamente'
     ],
-    nutrition: { calories: 220, protein: 8, carbs: 14, fat: 15 }
+    nutrition: { calories: 180, protein: 8, carbs: 12, fat: 12 }
   },
   {
-    id: '30',
-    slug: 'kibe-forno',
-    title: 'Kibe de Forno',
-    description: 'Kibe assado com carne e trigo para quibe',
-    image: 'https://images.pexels.com/photos/5949889/pexels-photo-5949889.jpeg?auto=compress&cs=tinysrgb&w=800',
-    prepTime: 50,
+    id: '7',
+    slug: 'lasanha-bolonhesa',
+    title: 'Lasanha à Bolonhesa',
+    description: 'Lasanha tradicional com molho bolonhesa e queijo derretido',
+    image: 'https://images.pexels.com/photos/4079520/pexels-photo-4079520.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 90,
     difficulty: 'Médio',
-    servings: 6,
-    category: 'Árabe',
-    tags: ['árabe', 'forno'],
+    servings: 8,
+    category: 'Italiana',
+    tags: ['lasanha', 'italiana', 'família'],
     ingredients: [
-      { id: '1', name: 'Trigo para quibe', amount: '250', unit: 'g' },
+      { id: '1', name: 'Massa de lasanha', amount: '500', unit: 'g' },
       { id: '2', name: 'Carne moída', amount: '500', unit: 'g' },
-      { id: '3', name: 'Hortelã', amount: '2', unit: 'colheres' },
-      { id: '4', name: 'Cebola', amount: '1', unit: 'unidade' }
+      { id: '3', name: 'Molho de tomate', amount: '500', unit: 'ml' },
+      { id: '4', name: 'Queijo mussarela', amount: '300', unit: 'g' },
+      { id: '5', name: 'Queijo parmesão', amount: '100', unit: 'g' }
     ],
     instructions: [
-      'Hidrate o trigo',
-      'Misture com a carne e temperos',
-      'Leve à assadeira',
-      'Asse até dourar',
-      'Sirva com coalhada'
+      'Cozinhe a massa conforme embalagem',
+      'Prepare o molho bolonhesa',
+      'Monte camadas: massa, molho, queijo',
+      'Repita as camadas até acabar',
+      'Cubra com queijo e leve ao forno',
+      'Asse por 40 minutos a 180°C',
+      'Deixe descansar antes de servir'
     ],
-    nutrition: { calories: 480, protein: 32, carbs: 36, fat: 22 }
+    nutrition: { calories: 420, protein: 28, carbs: 35, fat: 18 }
   },
   {
-    id: '31',
-    slug: 'butter-chicken',
-    title: 'Butter Chicken',
-    description: 'Frango cremoso indiano ao molho de tomate e manteiga',
-    image: 'https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg?auto=compress&cs=tinysrgb&w=800',
+    id: '8',
+    slug: 'pao-de-acucar',
+    title: 'Pão de Açúcar',
+    description: 'Pão doce tradicional brasileiro, fofinho e saboroso',
+    image: 'https://images.pexels.com/photos/1775043/pexels-photo-1775043.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 120,
+    difficulty: 'Médio',
+    servings: 12,
+    category: 'Pães',
+    tags: ['pão', 'doce', 'café da manhã'],
+    ingredients: [
+      { id: '1', name: 'Farinha de trigo', amount: '500', unit: 'g' },
+      { id: '2', name: 'Açúcar', amount: '100', unit: 'g' },
+      { id: '3', name: 'Fermento biológico', amount: '10', unit: 'g' },
+      { id: '4', name: 'Leite morno', amount: '250', unit: 'ml' },
+      { id: '5', name: 'Ovos', amount: '2', unit: 'unidades' }
+    ],
+    instructions: [
+      'Dissolva o fermento no leite morno',
+      'Misture farinha, açúcar e ovos',
+      'Adicione o leite com fermento',
+      'Sove a massa por 10 minutos',
+      'Deixe crescer por 1 hora',
+      'Modele os pães e deixe crescer novamente',
+      'Asse por 25 minutos a 180°C'
+    ],
+    nutrition: { calories: 220, protein: 6, carbs: 42, fat: 3 }
+  },
+  {
+    id: '9',
+    slug: 'moqueca-peixe',
+    title: 'Moqueca de Peixe',
+    description: 'Moqueca capixaba com peixe fresco, leite de coco e dendê',
+    image: 'https://images.pexels.com/photos/8477552/pexels-photo-8477552.jpeg?auto=compress&cs=tinysrgb&w=800',
     prepTime: 45,
     difficulty: 'Médio',
     servings: 4,
-    category: 'Indiana',
-    tags: ['curry', 'frango'],
+    category: 'Brasileira',
+    tags: ['peixe', 'moqueca', 'capixaba'],
     ingredients: [
-      { id: '1', name: 'Peito de frango', amount: '500', unit: 'g' },
-      { id: '2', name: 'Molho de tomate', amount: '300', unit: 'ml' },
-      { id: '3', name: 'Creme de leite', amount: '150', unit: 'ml' },
-      { id: '4', name: 'Manteiga', amount: '2', unit: 'colheres' }
+      { id: '1', name: 'Peixe em postas', amount: '600', unit: 'g' },
+      { id: '2', name: 'Leite de coco', amount: '400', unit: 'ml' },
+      { id: '3', name: 'Dendê', amount: '2', unit: 'colheres de sopa' },
+      { id: '4', name: 'Tomate', amount: '2', unit: 'unidades' },
+      { id: '5', name: 'Pimentão', amount: '1', unit: 'unidade' },
+      { id: '6', name: 'Coentro', amount: '1', unit: 'maço' }
     ],
     instructions: [
-      'Tempere e sele o frango',
-      'Adicione molho e especiarias',
-      'Junte manteiga e creme',
-      'Cozinhe até engrossar',
-      'Sirva com arroz'
+      'Tempere o peixe com sal e limão',
+      'Refogue cebola, tomate e pimentão',
+      'Adicione o peixe e o leite de coco',
+      'Tempere com dendê e pimenta',
+      'Cozinhe por 15 minutos em fogo baixo',
+      'Finalize com coentro picado',
+      'Sirva com arroz branco e pirão'
     ],
-    nutrition: { calories: 560, protein: 38, carbs: 18, fat: 34 }
+    nutrition: { calories: 320, protein: 28, carbs: 8, fat: 20 }
   },
   {
-    id: '32',
-    slug: 'ceviche-classico',
-    title: 'Ceviche Clássico',
-    description: 'Ceviche peruano de peixe branco com limão e coentro',
-    image: 'https://images.pexels.com/photos/6287527/pexels-photo-6287527.jpeg?auto=compress&cs=tinysrgb&w=800',
+    id: '10',
+    slug: 'risotto-cogumelos',
+    title: 'Risotto de Cogumelos',
+    description: 'Risotto cremoso com mix de cogumelos e parmesão',
+    image: 'https://images.pexels.com/photos/8477552/pexels-photo-8477552.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 40,
+    difficulty: 'Médio',
+    servings: 4,
+    category: 'Italiana',
+    tags: ['risotto', 'cogumelos', 'vegetariano'],
+    ingredients: [
+      { id: '1', name: 'Arroz arbóreo', amount: '300', unit: 'g' },
+      { id: '2', name: 'Cogumelos variados', amount: '300', unit: 'g' },
+      { id: '3', name: 'Caldo de legumes', amount: '1', unit: 'litro' },
+      { id: '4', name: 'Vinho branco', amount: '100', unit: 'ml' },
+      { id: '5', name: 'Parmesão', amount: '100', unit: 'g' }
+    ],
+    instructions: [
+      'Aqueça o caldo de legumes',
+      'Refogue os cogumelos e reserve',
+      'Doure o arroz na manteiga',
+      'Adicione vinho branco e deixe evaporar',
+      'Vá adicionando caldo aos poucos',
+      'Mexa sempre até o arroz ficar cremoso',
+      'Finalize com cogumelos e parmesão'
+    ],
+    nutrition: { calories: 380, protein: 12, carbs: 58, fat: 8 }
+  },
+  {
+    id: '11',
+    slug: 'tacos-mexicanos',
+    title: 'Tacos Mexicanos',
+    description: 'Tacos autênticos com carne temperada e guacamole',
+    image: 'https://images.pexels.com/photos/4958792/pexels-photo-4958792.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 30,
+    difficulty: 'Fácil',
+    servings: 4,
+    category: 'Mexicana',
+    tags: ['tacos', 'mexicano', 'picante'],
+    ingredients: [
+      { id: '1', name: 'Tortillas de milho', amount: '8', unit: 'unidades' },
+      { id: '2', name: 'Carne moída', amount: '400', unit: 'g' },
+      { id: '3', name: 'Abacate', amount: '2', unit: 'unidades' },
+      { id: '4', name: 'Tomate', amount: '2', unit: 'unidades' },
+      { id: '5', name: 'Cebola roxa', amount: '1', unit: 'unidade' }
+    ],
+    instructions: [
+      'Tempere a carne com cominho e páprica',
+      'Refogue a carne até dourar',
+      'Prepare o guacamole com abacate',
+      'Aqueça as tortillas na frigideira',
+      'Monte os tacos com carne e vegetais',
+      'Sirva com guacamole e molho picante'
+    ],
+    nutrition: { calories: 320, protein: 22, carbs: 28, fat: 14 }
+  },
+  {
+    id: '12',
+    slug: 'sushi-salmao',
+    title: 'Sushi de Salmão',
+    description: 'Sushi tradicional japonês com salmão fresco',
+    image: 'https://images.pexels.com/photos/357756/pexels-photo-357756.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 60,
+    difficulty: 'Difícil',
+    servings: 4,
+    category: 'Japonesa',
+    tags: ['sushi', 'japonês', 'peixe cru'],
+    ingredients: [
+      { id: '1', name: 'Arroz para sushi', amount: '300', unit: 'g' },
+      { id: '2', name: 'Salmão fresco', amount: '200', unit: 'g' },
+      { id: '3', name: 'Nori', amount: '4', unit: 'folhas' },
+      { id: '4', name: 'Vinagre de arroz', amount: '50', unit: 'ml' },
+      { id: '5', name: 'Wasabi', amount: '1', unit: 'colher de chá' }
+    ],
+    instructions: [
+      'Cozinhe o arroz e tempere com vinagre',
+      'Corte o salmão em fatias finas',
+      'Estenda o nori sobre a esteira',
+      'Espalhe o arroz sobre o nori',
+      'Adicione o salmão e enrole',
+      'Corte em pedaços com faca afiada',
+      'Sirva com wasabi e shoyu'
+    ],
+    nutrition: { calories: 280, protein: 18, carbs: 35, fat: 8 }
+  },
+  {
+    id: '13',
+    slug: 'hamburguer-artesanal',
+    title: 'Hambúrguer Artesanal',
+    description: 'Hambúrguer gourmet com blend especial e ingredientes frescos',
+    image: 'https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=800',
     prepTime: 25,
     difficulty: 'Fácil',
     servings: 4,
-    category: 'Peruana',
-    tags: ['peixe', 'cítrico', 'frio'],
+    category: 'Lanches',
+    tags: ['hambúrguer', 'gourmet', 'lanche'],
     ingredients: [
-      { id: '1', name: 'Peixe branco', amount: '400', unit: 'g' },
-      { id: '2', name: 'Suco de limão', amount: '120', unit: 'ml' },
-      { id: '3', name: 'Cebola roxa', amount: '1', unit: 'unidade' },
-      { id: '4', name: 'Coentro', amount: '2', unit: 'colheres' }
+      { id: '1', name: 'Carne moída especial', amount: '600', unit: 'g' },
+      { id: '2', name: 'Pão de hambúrguer', amount: '4', unit: 'unidades' },
+      { id: '3', name: 'Queijo cheddar', amount: '4', unit: 'fatias' },
+      { id: '4', name: 'Alface', amount: '4', unit: 'folhas' },
+      { id: '5', name: 'Tomate', amount: '1', unit: 'unidade' }
     ],
     instructions: [
-      'Corte o peixe em cubos',
-      'Marine no limão por 10–15 min',
-      'Junte cebola e coentro',
-      'Acerte o sal e pimenta',
-      'Sirva gelado'
+      'Modele a carne em 4 hambúrgueres',
+      'Tempere com sal e pimenta',
+      'Grelhe por 4 minutos de cada lado',
+      'Derreta o queijo sobre a carne',
+      'Torre levemente o pão',
+      'Monte com alface, tomate e molhos',
+      'Sirva imediatamente'
     ],
-    nutrition: { calories: 240, protein: 28, carbs: 10, fat: 8 }
+    nutrition: { calories: 520, protein: 32, carbs: 28, fat: 28 }
+  },
+  {
+    id: '14',
+    slug: 'paella-valenciana',
+    title: 'Paella Valenciana',
+    description: 'Paella tradicional espanhola com frango, coelho e açafrão',
+    image: 'https://images.pexels.com/photos/16743489/pexels-photo-16743489.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 75,
+    difficulty: 'Difícil',
+    servings: 6,
+    category: 'Espanhola',
+    tags: ['paella', 'espanhol', 'arroz'],
+    ingredients: [
+      { id: '1', name: 'Arroz bomba', amount: '400', unit: 'g' },
+      { id: '2', name: 'Frango em pedaços', amount: '500', unit: 'g' },
+      { id: '3', name: 'Açafrão', amount: '1', unit: 'g' },
+      { id: '4', name: 'Vagem', amount: '200', unit: 'g' },
+      { id: '5', name: 'Caldo de galinha', amount: '1', unit: 'litro' }
+    ],
+    instructions: [
+      'Doure o frango na paellera',
+      'Adicione as vagens e refogue',
+      'Junte o arroz e misture bem',
+      'Adicione caldo quente com açafrão',
+      'Cozinhe sem mexer por 20 minutos',
+      'Deixe descansar 5 minutos',
+      'Sirva diretamente da paellera'
+    ],
+    nutrition: { calories: 420, protein: 25, carbs: 52, fat: 12 }
+  },
+  {
+    id: '15',
+    slug: 'tiramisu-classico',
+    title: 'Tiramisù Clássico',
+    description: 'Sobremesa italiana com café, mascarpone e cacau',
+    image: 'https://images.pexels.com/photos/6880219/pexels-photo-6880219.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 30,
+    difficulty: 'Médio',
+    servings: 8,
+    category: 'Doces',
+    tags: ['tiramisù', 'italiano', 'café'],
+    ingredients: [
+      { id: '1', name: 'Biscoito champagne', amount: '200', unit: 'g' },
+      { id: '2', name: 'Mascarpone', amount: '500', unit: 'g' },
+      { id: '3', name: 'Café forte', amount: '300', unit: 'ml' },
+      { id: '4', name: 'Ovos', amount: '4', unit: 'unidades' },
+      { id: '5', name: 'Cacau em pó', amount: '2', unit: 'colheres de sopa' }
+    ],
+    instructions: [
+      'Prepare café forte e deixe esfriar',
+      'Separe gemas e claras dos ovos',
+      'Bata gemas com açúcar até clarear',
+      'Misture o mascarpone às gemas',
+      'Molhe biscoitos no café rapidamente',
+      'Monte camadas alternadas',
+      'Gelar por 4 horas e polvilhar cacau'
+    ],
+    nutrition: { calories: 380, protein: 8, carbs: 28, fat: 26 }
+  },
+  {
+    id: '16',
+    slug: 'coxinha-frango',
+    title: 'Coxinha de Frango',
+    description: 'Coxinha tradicional brasileira com recheio cremoso de frango',
+    image: 'https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 90,
+    difficulty: 'Médio',
+    servings: 20,
+    category: 'Salgados',
+    tags: ['coxinha', 'salgado', 'festa'],
+    ingredients: [
+      { id: '1', name: 'Peito de frango', amount: '500', unit: 'g' },
+      { id: '2', name: 'Farinha de trigo', amount: '500', unit: 'g' },
+      { id: '3', name: 'Caldo de galinha', amount: '500', unit: 'ml' },
+      { id: '4', name: 'Ovos', amount: '2', unit: 'unidades' },
+      { id: '5', name: 'Farinha de rosca', amount: '200', unit: 'g' }
+    ],
+    instructions: [
+      'Cozinhe e desfie o frango',
+      'Prepare a massa com farinha e caldo',
+      'Faça o recheio refogado',
+      'Modele as coxinhas',
+      'Passe no ovo batido e farinha de rosca',
+      'Frite em óleo quente até dourar',
+      'Escorra em papel absorvente'
+    ],
+    nutrition: { calories: 180, protein: 12, carbs: 18, fat: 8 }
+  },
+  {
+    id: '17',
+    slug: 'pad-thai',
+    title: 'Pad Thai',
+    description: 'Macarrão tailandês com camarão, amendoim e molho agridoce',
+    image: 'https://images.pexels.com/photos/4518843/pexels-photo-4518843.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 25,
+    difficulty: 'Médio',
+    servings: 4,
+    category: 'Tailandesa',
+    tags: ['pad thai', 'tailandês', 'camarão'],
+    ingredients: [
+      { id: '1', name: 'Macarrão de arroz', amount: '300', unit: 'g' },
+      { id: '2', name: 'Camarão', amount: '300', unit: 'g' },
+      { id: '3', name: 'Amendoim torrado', amount: '100', unit: 'g' },
+      { id: '4', name: 'Molho de peixe', amount: '3', unit: 'colheres de sopa' },
+      { id: '5', name: 'Brotos de feijão', amount: '150', unit: 'g' }
+    ],
+    instructions: [
+      'Deixe o macarrão de molho em água morna',
+      'Refogue o camarão até ficar rosado',
+      'Adicione o macarrão escorrido',
+      'Tempere com molho de peixe e açúcar',
+      'Junte os brotos e amendoim',
+      'Misture rapidamente em fogo alto',
+      'Sirva com limão e pimenta'
+    ],
+    nutrition: { calories: 420, protein: 22, carbs: 58, fat: 12 }
+  },
+  {
+    id: '18',
+    slug: 'ratatouille',
+    title: 'Ratatouille',
+    description: 'Refogado francês de legumes mediterrâneos',
+    image: 'https://images.pexels.com/photos/8477552/pexels-photo-8477552.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 45,
+    difficulty: 'Fácil',
+    servings: 6,
+    category: 'Francesa',
+    tags: ['ratatouille', 'francês', 'vegetariano'],
+    ingredients: [
+      { id: '1', name: 'Berinjela', amount: '2', unit: 'unidades' },
+      { id: '2', name: 'Abobrinha', amount: '2', unit: 'unidades' },
+      { id: '3', name: 'Pimentão vermelho', amount: '1', unit: 'unidade' },
+      { id: '4', name: 'Tomate', amount: '4', unit: 'unidades' },
+      { id: '5', name: 'Ervas de Provence', amount: '1', unit: 'colher de chá' }
+    ],
+    instructions: [
+      'Corte todos os legumes em cubos',
+      'Refogue a cebola até dourar',
+      'Adicione berinjela e abobrinha',
+      'Junte pimentão e tomate',
+      'Tempere com ervas e sal',
+      'Cozinhe em fogo baixo por 30 min',
+      'Sirva quente como acompanhamento'
+    ],
+    nutrition: { calories: 120, protein: 3, carbs: 18, fat: 4 }
+  },
+  {
+    id: '19',
+    slug: 'cheesecake-frutas-vermelhas',
+    title: 'Cheesecake de Frutas Vermelhas',
+    description: 'Cheesecake cremoso com calda de frutas vermelhas',
+    image: 'https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 60,
+    difficulty: 'Médio',
+    servings: 10,
+    category: 'Doces',
+    tags: ['cheesecake', 'frutas vermelhas', 'sobremesa'],
+    ingredients: [
+      { id: '1', name: 'Cream cheese', amount: '600', unit: 'g' },
+      { id: '2', name: 'Biscoito maisena', amount: '200', unit: 'g' },
+      { id: '3', name: 'Frutas vermelhas', amount: '300', unit: 'g' },
+      { id: '4', name: 'Açúcar', amount: '150', unit: 'g' },
+      { id: '5', name: 'Ovos', amount: '3', unit: 'unidades' }
+    ],
+    instructions: [
+      'Triture os biscoitos e misture com manteiga',
+      'Forre o fundo da forma com a mistura',
+      'Bata cream cheese com açúcar e ovos',
+      'Despeje sobre a base de biscoito',
+      'Asse em banho-maria por 50 minutos',
+      'Deixe esfriar completamente',
+      'Cubra com calda de frutas vermelhas'
+    ],
+    nutrition: { calories: 420, protein: 8, carbs: 35, fat: 28 }
+  },
+  {
+    id: '20',
+    slug: 'bobó-camarão',
+    title: 'Bobó de Camarão',
+    description: 'Prato baiano cremoso com camarão e mandioca',
+    image: 'https://images.pexels.com/photos/8477552/pexels-photo-8477552.jpeg?auto=compress&cs=tinysrgb&w=800',
+    prepTime: 50,
+    difficulty: 'Médio',
+    servings: 4,
+    category: 'Brasileira',
+    tags: ['bobó', 'camarão', 'baiano'],
+    ingredients: [
+      { id: '1', name: 'Camarão grande', amount: '500', unit: 'g' },
+      { id: '2', name: 'Mandioca', amount: '600', unit: 'g' },
+      { id: '3', name: 'Leite de coco', amount: '400', unit: 'ml' },
+      { id: '4', name: 'Dendê', amount: '2', unit: 'colheres de sopa' },
+      { id: '5', name: 'Coentro', amount: '1', unit: 'maço' }
+    ],
+    instructions: [
+      'Cozinhe a mandioca até amolecer',
+      'Amasse até formar um purê cremoso',
+      'Tempere os camarões e refogue',
+      'Misture o purê com leite de coco',
+      'Adicione os camarões ao bobó',
+      'Tempere com dendê e pimenta',
+      'Finalize com coentro picado'
+    ],
+    nutrition: { calories: 380, protein: 28, carbs: 32, fat: 18 }
   }
-];
+]
 
-<<<<<<< HEAD
-export default mockRecipes;
-=======
 // Mock shopping list data / Dados mockados da lista de compras
 export const mockShoppingList: ShoppingListItem[] = [
   { id: '1', name: 'Tomate', amount: '1', unit: 'kg', category: 'Hortifruti', purchased: false },
@@ -385,53 +648,24 @@ export const mockExpenses: Expense[] = [
   { id: '4', description: 'Açougue Central', amount: 89.90, category: 'Carnes', date: '2024-12-30' },
   { id: '5', description: 'Mercado XYZ', amount: 203.45, category: 'Alimentação', date: '2024-12-28' }
 ]
->>>>>>> dan/wip-2025-08-12
 
-// ===== Tipos auxiliares =====
-export type Expense = {
-  id: string;
-  title: string;
-  category: string;     // ex: 'Supermercado', 'Restaurantes', 'Assinaturas'
-  amount: number;       // em R$
-  date: string;         // ISO 'YYYY-MM-DD'
-  paymentMethod?: string;
-};
-
-export type ShoppingListItem = {
-  id: string;
-  name: string;
-  amount: string;       // manter string p/ '2', '300', '1.5'
-  unit?: string;        // ex: 'g', 'kg', 'unidades', 'ml'
-  checked?: boolean;
-  recipeId?: string;    // opcional: relacionar item a uma receita
-};
-
-// ===== Dados mockados que as páginas esperam =====
-export const mockExpenses: Expense[] = [
-  { id: 'e1', title: 'Mercado do mês', category: 'Supermercado', amount: 320.45, date: '2025-08-10', paymentMethod: 'Cartão' },
-  { id: 'e2', title: 'Ifood',           category: 'Restaurantes', amount: 68.90,  date: '2025-08-09' },
-  { id: 'e3', title: 'Netflix',         category: 'Assinaturas',  amount: 18.90,  date: '2025-08-05' },
-  { id: 'e4', title: 'Transporte',      category: 'Transporte',   amount: 42.00,  date: '2025-08-04' },
-];
-
-export const mockShoppingList: ShoppingListItem[] = [
-  { id: 's1', name: 'Arroz',        amount: '2',   unit: 'kg', checked: false },
-  { id: 's2', name: 'Peito de frango', amount: '500', unit: 'g', checked: false, recipeId: '31' },
-  { id: 's3', name: 'Cebola',       amount: '2',   unit: 'unidades', checked: false },
-  { id: 's4', name: 'Leite',        amount: '1',   unit: 'L', checked: false },
-];
-
-// ===== Helpers usados pelas páginas =====
-export function getRecipeBySlug(slug: string) {
-  return mockRecipes.find((r) => r.slug === slug);
+// Helper functions / Funções auxiliares
+export const getRecipesByIds = (ids: string[]): Recipe[] => {
+  return mockRecipes.filter(recipe => ids.includes(recipe.id))
 }
 
-export function getRecipesByIds(ids: string[]) {
-  const set = new Set(ids);
-  return mockRecipes.filter((r) => set.has(r.id));
+export const searchRecipes = (query: string, category?: string, difficulty?: string): Recipe[] => {
+  return mockRecipes.filter(recipe => {
+    const matchesQuery = recipe.title.toLowerCase().includes(query.toLowerCase()) ||
+                        recipe.description.toLowerCase().includes(query.toLowerCase()) ||
+                        recipe.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+    
+    const matchesCategory = !category || recipe.category === category
+    const matchesDifficulty = !difficulty || recipe.difficulty === difficulty
+    
+    return matchesQuery && matchesCategory && matchesDifficulty
+  })
 }
-<<<<<<< HEAD
-=======
 
 export const getRecipeBySlug = (slug: string): Recipe | null => {
   return mockRecipes.find(recipe => recipe.slug === slug) || null
@@ -465,4 +699,3 @@ export const consolidateIngredients = (recipeIds: string[]): ShoppingListItem[] 
   
   return Array.from(ingredientMap.values())
 }
->>>>>>> dan/wip-2025-08-12
