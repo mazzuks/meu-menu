@@ -37,11 +37,11 @@ export default function SpecialDateBanner() {
         {/* Imagem */}
         <div className="relative aspect-[4/3] sm:aspect-[3/2]">
           <Image
-            src="/images/banners/churrasco.jpg" // mantém o path existente
-            alt="Picanha grelhada com acompanhamentos"
+            src="https://images.pexels.com/photos/1251208/pexels-photo-1251208.jpeg?auto=compress&cs=tinysrgb&w=800"
+            alt="Churrasco de Picanha"
             fill
             priority
-            className="rounded-xl object-cover"
+            className="object-cover rounded-xl"
           />
         </div>
       </div>
