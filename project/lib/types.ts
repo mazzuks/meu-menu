@@ -3,7 +3,9 @@ import { z } from 'zod'
 
 export type UserRole = 'user' | 'employee' | 'master' | 'b2b_client' | 'agency'
 
-// Business Account schema / Schema da conta empresarial
+/* ================================
+ * Business Account schema
+ * ================================ */
 export const BusinessAccountSchema = z.object({
   id: z.string(),
   name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
@@ -23,7 +25,9 @@ export const BusinessAccountSchema = z.object({
   updatedAt: z.string()
 })
 
-// Promotion schema / Schema da promoção
+/* ================================
+ * Promotion schema
+ * ================================ */
 export const PromotionSchema = z.object({
   id: z.string(),
   businessAccountId: z.string(),
@@ -47,7 +51,33 @@ export const PromotionSchema = z.object({
   updatedAt: z.string()
 })
 
-// User Account schema / Schema da conta de usuário
+/* ================================
+ * Recipe schema (novo)
+ * ================================ */
+export const RecipeSchema = z.object({
+  id: z.string(),
+  title: z.string().min(2, 'Título deve ter pelo menos 2 caracteres'),
+  slug: z.string().min(1, 'Slug é obrigatório'),
+  category: z.string().min(1, 'Categoria é obrigatória'),
+  prepTime: z.number().int().min(0).default(0),
+
+  // Campos opcionais
+  description: z.string().optional(),
+  imageUrl: z.string().url().optional(),       // <-- para bater a imagem com a receita
+  videoUrl: z.string().url().optional(),
+  ingredients: z.array(z.string()).default([]),
+  steps: z.array(z.string()).default([]),
+  servings: z.number().int().min(1).optional(),
+  rating: z.number().min(0).max(5).optional(),
+
+  // Metadados opcionais
+  createdAt: z.string().optional(),
+  updatedAt: z.string().optional()
+})
+
+/* ================================
+ * User Account schema
+ * ================================ */
 export const UserAccountSchema = z.object({
   id: z.string(),
   email: z.string().email(),
@@ -60,12 +90,17 @@ export const UserAccountSchema = z.object({
   updatedAt: z.string()
 })
 
-// Inferred types / Tipos inferidos
+/* ================================
+ * Inferred types
+ * ================================ */
 export type BusinessAccount = z.infer<typeof BusinessAccountSchema>
 export type Promotion = z.infer<typeof PromotionSchema>
+export type Recipe = z.infer<typeof RecipeSchema>          // <-- novo tipo
 export type UserAccount = z.infer<typeof UserAccountSchema>
 
-// Permission constants / Constantes de permissões
+/* ================================
+ * Permission constants
+ * ================================ */
 export const PERMISSIONS = {
   // User
   VIEW_PROMOTIONS: 'view_promotions',
@@ -86,7 +121,9 @@ export const PERMISSIONS = {
   CREATE_CAMPAIGNS: 'create_campaigns'
 } as const
 
-// Role permissions mapping / Mapeamento por papel
+/* ================================
+ * Role permissions mapping
+ * ================================ */
 export const ROLE_PERMISSIONS: Record<UserRole, string[]> = {
   user: [PERMISSIONS.VIEW_PROMOTIONS, PERMISSIONS.VIEW_RECIPES],
   employee: [
@@ -120,7 +157,9 @@ export const ROLE_PERMISSIONS: Record<UserRole, string[]> = {
   ]
 }
 
-// Helpers
+/* ================================
+ * Helpers
+ * ================================ */
 export function hasPermission(userRole: UserRole, permission: string): boolean {
   return ROLE_PERMISSIONS[userRole]?.includes(permission) || false
 }
