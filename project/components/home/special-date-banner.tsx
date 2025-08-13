@@ -1,34 +1,51 @@
-'use client'
+import Image from "next/image";
+import Link from "next/link";
 
-import Link from 'next/link'
+export default function SpecialDateBanner() {
+  // Se quiser trocar o valor do selinho, muda aqui:
+  const ctaBadge = "49";
 
-export function SpecialDateBanner() {
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-50 to-white p-4 shadow-sm">
-      <p className="text-xs font-semibold text-slate-500">HOJE É DIA DE</p>
-      <h3 className="mt-1 text-xl font-bold text-slate-900">Dia dos Pais</h3>
-      <p className="mt-1 max-w-[22rem] text-sm text-slate-600">
-        Picanha grelhada no ponto perfeito com farofa e vinagrete
-      </p>
+    <section className="rounded-2xl bg-white shadow-sm ring-1 ring-black/5">
+      <div className="grid gap-4 p-5 sm:grid-cols-[1.35fr_1fr] sm:gap-6 sm:p-6">
+        {/* Texto */}
+        <div className="flex flex-col gap-3">
+          <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-zinc-500">
+            Hoje é dia de
+          </p>
 
-      <div className="mt-3 flex gap-3">
-        <Link
-          href="/receitas"
-          prefetch
-          className="inline-flex items-center rounded-lg bg-slate-900 px-3 py-2 text-white"
-        >
-          Ver Receitas
-        </Link>
+          <h2 className="text-2xl font-extrabold text-zinc-900 sm:text-[26px]">
+            Dia dos Pais
+          </h2>
 
-        {/* Exemplo para vídeo; troque por uma URL real se quiser */}
-        <Link
-          href="/reels"
-          prefetch
-          className="inline-flex items-center rounded-lg border px-3 py-2 text-slate-700"
-        >
-          Ver Vídeo
-        </Link>
+          <p className="text-sm text-zinc-600">
+            Picanha grelhada no ponto perfeito com farofa e vinagrete
+          </p>
+
+          <div className="pt-1">
+            <Link
+              href="/receitas/churrasco"
+              className="inline-flex items-center gap-3 rounded-xl bg-rose-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-rose-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
+            >
+              <span className="rounded-lg bg-rose-700/90 px-2 py-1 text-[11px] font-bold leading-none">
+                {ctaBadge}
+              </span>
+              Ver Receita
+            </Link>
+          </div>
+        </div>
+
+        {/* Imagem (já existe no projeto) */}
+        <div className="relative aspect-[4/3] sm:aspect-[3/2]">
+          <Image
+            src="/images/banners/churrasco.jpg" // mantém o path que você já tem
+            alt="Picanha grelhada com acompanhamentos"
+            fill
+            priority
+            className="rounded-xl object-cover"
+          />
+        </div>
       </div>
-    </div>
-  )
+    </section>
+  );
 }
