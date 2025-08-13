@@ -347,3 +347,47 @@ export const mockRecipes: Recipe[] = [
 ];
 
 export default mockRecipes;
+
+// ===== Tipos auxiliares =====
+export type Expense = {
+  id: string;
+  title: string;
+  category: string;     // ex: 'Supermercado', 'Restaurantes', 'Assinaturas'
+  amount: number;       // em R$
+  date: string;         // ISO 'YYYY-MM-DD'
+  paymentMethod?: string;
+};
+
+export type ShoppingListItem = {
+  id: string;
+  name: string;
+  amount: string;       // manter string p/ '2', '300', '1.5'
+  unit?: string;        // ex: 'g', 'kg', 'unidades', 'ml'
+  checked?: boolean;
+  recipeId?: string;    // opcional: relacionar item a uma receita
+};
+
+// ===== Dados mockados que as páginas esperam =====
+export const mockExpenses: Expense[] = [
+  { id: 'e1', title: 'Mercado do mês', category: 'Supermercado', amount: 320.45, date: '2025-08-10', paymentMethod: 'Cartão' },
+  { id: 'e2', title: 'Ifood',           category: 'Restaurantes', amount: 68.90,  date: '2025-08-09' },
+  { id: 'e3', title: 'Netflix',         category: 'Assinaturas',  amount: 18.90,  date: '2025-08-05' },
+  { id: 'e4', title: 'Transporte',      category: 'Transporte',   amount: 42.00,  date: '2025-08-04' },
+];
+
+export const mockShoppingList: ShoppingListItem[] = [
+  { id: 's1', name: 'Arroz',        amount: '2',   unit: 'kg', checked: false },
+  { id: 's2', name: 'Peito de frango', amount: '500', unit: 'g', checked: false, recipeId: '31' },
+  { id: 's3', name: 'Cebola',       amount: '2',   unit: 'unidades', checked: false },
+  { id: 's4', name: 'Leite',        amount: '1',   unit: 'L', checked: false },
+];
+
+// ===== Helpers usados pelas páginas =====
+export function getRecipeBySlug(slug: string) {
+  return mockRecipes.find((r) => r.slug === slug);
+}
+
+export function getRecipesByIds(ids: string[]) {
+  const set = new Set(ids);
+  return mockRecipes.filter((r) => set.has(r.id));
+}
