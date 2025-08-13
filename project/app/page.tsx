@@ -5,56 +5,48 @@ import { QuickActions } from '@/components/home/quick-actions'
 import { RecipeCarousel } from '@/components/home/recipe-carousel'
 import { SpecialDateBanner } from '@/components/home/special-date-banner'
 import { PromotionsCarousel } from '@/components/home/promotions-carousel'
-// import { ReelsCarousel } from '@/components/home/reels-carousel' // [DESATIVADO – manter para futuro]
+import { ReelsCarousel } from '@/components/home/reels-carousel'
 import { mockRecipes } from '@/lib/mock-data'
 import BottomNav from '@/components/layout/bottom-nav'
 
-<h2 className="px-4 text-lg font-semibold mb-2">Rápidas</h2>
-<RecipeCarousel recipes={quickRecipes} />
-
-<h2 className="px-4 text-lg font-semibold mb-2 mt-4">Italiana</h2>
-<RecipeCarousel recipes={italianRecipes} />
-
-<h2 className="px-4 text-lg font-semibold mb-2 mt-4">Brasileira</h2>
-<RecipeCarousel recipes={brazilianRecipes} />
-
-<h2 className="px-4 text-lg font-semibold mb-2 mt-4">Doces</h2>
-<RecipeCarousel recipes={dessertRecipes} />
-
-
-
 export default function HomePage() {
-  // Filter recipes by category for carousels
-  const italianRecipes   = mockRecipes.filter(r => r.category === 'Italiana').slice(0, 6)
+  const italianRecipes = mockRecipes.filter(r => r.category === 'Italiana').slice(0, 6)
   const brazilianRecipes = mockRecipes.filter(r => r.category === 'Brasileira').slice(0, 6)
-  const dessertRecipes   = mockRecipes.filter(r => r.category === 'Doces').slice(0, 6)
-  const quickRecipes     = mockRecipes.filter(r => r.prepTime <= 30).slice(0, 6)
+  const dessertRecipes = mockRecipes.filter(r => r.category === 'Doces').slice(0, 6)
+  const quickRecipes = mockRecipes.filter(r => r.prepTime <= 30).slice(0, 6)
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-gray-50">
       <Header />
-      <div className="px-4 pb-6">
-        <div className="max-w-md mx-auto">
-          {/* Special date banner */}
-          <SpecialDateBanner />
+      <main className="pb-24">
+        <SpecialDateBanner />
+        <QuickActions />
 
-          {/* Quick actions */}
-          <QuickActions />
+        <section className="mt-4 space-y-5">
+          <div>
+            <h2 className="px-4 text-lg font-semibold mb-2">Rápidas</h2>
+            <RecipeCarousel recipes={quickRecipes} />
+          </div>
 
-          {/* Promotions carousel */}
+          <div>
+            <h2 className="px-4 text-lg font-semibold mb-2">Italiana</h2>
+            <RecipeCarousel recipes={italianRecipes} />
+          </div>
+
+          <div>
+            <h2 className="px-4 text-lg font-semibold mb-2">Brasileira</h2>
+            <RecipeCarousel recipes={brazilianRecipes} />
+          </div>
+
+          <div>
+            <h2 className="px-4 text-lg font-semibold mb-2">Doces</h2>
+            <RecipeCarousel recipes={dessertRecipes} />
+          </div>
+
           <PromotionsCarousel />
-
-          {/* --- Vídeos em Destaque (DESATIVADO TEMPORARIAMENTE) ---
           <ReelsCarousel />
-          */}
-
-          {/* Recipe carousels */}
-          <RecipeCarousel title="Receitas Rápidas"    recipes={quickRecipes} />
-          <RecipeCarousel title="Culinária Italiana"  recipes={italianRecipes} />
-          <RecipeCarousel title="Sabores do Brasil"   recipes={brazilianRecipes} />
-          <RecipeCarousel title="Doces & Sobremesas"  recipes={dessertRecipes} />
-        </div>
-      </div>
+        </section>
+      </main>
       <BottomNav />
     </div>
   )
