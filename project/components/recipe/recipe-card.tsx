@@ -1,41 +1,74 @@
-"use client";
+'use client'
+import Link from 'next/link'
+import { cn } from '@/lib/utils' // opcional, se você tiver
+import { Clock, ChefHat } from 'lucide-react'
 
-import Image from "next/image";
-import * as React from "react";
-import type { Recipe } from "@/lib/mock-data";
+type Recipe = {
+  id: string
+  slug: string
+  title: string
+  description?: string
+  image?: string
+  imageUrl?: string
+  prepTime?: number
+  difficulty?: 'Fácil' | 'Médio' | 'Difícil'
+}
 
-type Props = {
-  recipe: Recipe;
-  onClick?: () => void;
-  className?: string;
-};
+export function RecipeCard({
+  recipe,
+  variant = 'vertical',
+  className,
+}: {
+  recipe: Recipe
+  variant?: 'vertical' | 'horizontal'
+  className?: string
+}) {
+  const href = `/receitas/${recipe.slug}`
+  const img = recipe.imageUrl ?? recipe.image
 
-export function RecipeCard({ recipe, onClick, className }: Props) {
-  return (
-    <div
-      className={`rounded-lg border overflow-hidden hover:shadow-md transition ${className || ""}`}
-      onClick={onClick}
-      role={onClick ? "button" : undefined}
-    >
-      <div className="relative h-40 w-full">
-        {/* Se quiser, troque para <img src=...> para simplificar */}
-        <Image
-          src={recipe.image}
-          alt={recipe.title}
-          fill
-          sizes="100vw"
-          style={{ objectFit: "cover" }}
-        />
+  if (variant === 'horizontal') {
+    return (
+      <div className={cn('relative bg-white rounded-2xl shadow-sm overflow-hidden', className)}>
+        <Link href={href} className="absolute inset-0 z-10" aria-label={recipe.title} />
+        <div className="flex">
+          {img && (
+            <img
+              src={img}
+              alt={recipe.title}
+              className="w-28 h-28 object-cover flex-shrink-0"
+            />
+          )}
+          <div className="p-3 flex-1">
+            <h3 className="font-medium line-clamp-1">{recipe.title}</h3>
+            <p className="text-xs text-gray-600 line-clamp-2 mt-1">{recipe.description}</p>
+            <div className="flex items-center gap-3 text-[11px] text-gray-600 mt-2">
+              {recipe.prepTime ? <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{recipe.prepTime} min</span> : null}
+              {recipe.difficulty ? <span className="flex items-center gap-1"><ChefHat className="w-3 h-3" />{recipe.difficulty}</span> : null}
+            </div>
+          </div>
+        </div>
       </div>
+    )
+  }
+
+  // vertical
+  return (
+    <div className={cn('relative bg-white rounded-2xl shadow-sm overflow-hidden', className)}>
+      <Link href={href} className="absolute inset-0 z-10" aria-label={recipe.title} />
+      {img && (
+        <img
+          src={img}
+          alt={recipe.title}
+          className="w-full h-32 object-cover"
+        />
+      )}
       <div className="p-3">
-        <h3 className="font-semibold">{recipe.title}</h3>
-        <p className="text-sm text-muted-foreground line-clamp-2">
-          {recipe.description}
-        </p>
-        <div className="mt-2 text-xs text-muted-foreground">
-          {recipe.prepTime} min • {recipe.difficulty} • {recipe.servings} porções
+        <h3 className="font-medium line-clamp-1">{recipe.title}</h3>
+        <div className="flex items-center gap-3 text-[11px] text-gray-600 mt-1">
+          {recipe.prepTime ? <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{recipe.prepTime} min</span> : null}
+          {recipe.difficulty ? <span className="flex items-center gap-1"><ChefHat className="w-3 h-3" />{recipe.difficulty}</span> : null}
         </div>
       </div>
     </div>
-  );
+  )
 }
