@@ -8,36 +8,23 @@ import { PromotionsCarousel } from '@/components/home/promotions-carousel'
 import { ReelsCarousel } from '@/components/home/reels-carousel'
 import { mockRecipes } from '@/lib/mock-data'
 import BottomNav from '@/components/layout/bottom-nav'
-import { LinkOverlay } from '@/components/ui/LinkOverlay' // <— adicionado
 
 export default function HomePage() {
-  // Filtra receitas por categoria para os carrosséis
-  const italianRecipes = mockRecipes.filter(recipe => recipe.category === 'Italiana').slice(0, 6)
-  const brazilianRecipes = mockRecipes.filter(recipe => recipe.category === 'Brasileira').slice(0, 6)
-  const dessertRecipes = mockRecipes.filter(recipe => recipe.category === 'Doces').slice(0, 6)
-  const quickRecipes = mockRecipes.filter(recipe => recipe.prepTime <= 30).slice(0, 6)
+  const italianRecipes = mockRecipes.filter(r => r.category === 'Italiana').slice(0, 6)
+  const brazilianRecipes = mockRecipes.filter(r => r.category === 'Brasileira').slice(0, 6)
+  const dessertRecipes = mockRecipes.filter(r => r.category === 'Doces').slice(0, 6)
+  const quickRecipes = mockRecipes.filter(r => r.prepTime <= 30).slice(0, 6)
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-gray-50 pb-20 relative z-0">
       <Header />
 
-      <div className="px-4 pb-6">
+      <div className="px-4 pb-6 pointer-events-auto">
         <div className="max-w-md mx-auto">
-          {/* Banner do dia — fica clicável sem mudar layout */}
-          <LinkOverlay href="/buscar" ariaLabel="Ir para Buscar">
-            <SpecialDateBanner />
-          </LinkOverlay>
-
-          {/* Ações rápidas (arquivo abaixo já deixa cada botão clicável) */}
+          <SpecialDateBanner />
           <QuickActions />
-
-          {/* Promoções */}
           <PromotionsCarousel />
-
-          {/* Reels */}
           <ReelsCarousel />
-
-          {/* Carrosséis de receitas */}
           <RecipeCarousel title="Receitas Rápidas" recipes={quickRecipes} />
           <RecipeCarousel title="Culinária Italiana" recipes={italianRecipes} />
           <RecipeCarousel title="Sabores do Brasil" recipes={brazilianRecipes} />
