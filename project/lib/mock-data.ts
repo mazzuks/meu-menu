@@ -8,7 +8,8 @@ export interface Recipe {
   slug: string
   title: string
   description: string
-  image: string
+  image: string                 // legado: continua funcionando
+  imageUrl?: string             // novo: preferencial para cards/carrosséis
   prepTime: number // minutes / minutos
   difficulty: 'Fácil' | 'Médio' | 'Difícil'
   servings: number
@@ -57,6 +58,7 @@ export const mockRecipes: Recipe[] = [
     title: 'Pizza Margherita',
     description: 'Pizza clássica italiana com molho de tomate, mussarela e manjericão fresco',
     image: 'https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageUrl: 'https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&cs=tinysrgb&w=800',
     prepTime: 45,
     difficulty: 'Médio',
     servings: 4,
@@ -115,6 +117,7 @@ export const mockRecipes: Recipe[] = [
     title: 'Churrasco de Picanha',
     description: 'Picanha grelhada no ponto perfeito com farofa e vinagrete',
     image: 'https://images.pexels.com/photos/1251208/pexels-photo-1251208.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageUrl: 'https://images.pexels.com/photos/1251208/pexels-photo-1251208.jpeg?auto=compress&cs=tinysrgb&w=800',
     prepTime: 60,
     difficulty: 'Médio',
     servings: 6,
