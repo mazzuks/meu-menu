@@ -2,10 +2,7 @@
 
 import Image from "next/image";
 import * as React from "react";
-// mantém seu tipo atual
 import type { Recipe } from "@/lib/mock-data";
-// novo helper
-import { getRecipeImage } from "@/lib/image-helpers";
 
 type Props = {
   recipe: Recipe;
@@ -14,8 +11,6 @@ type Props = {
 };
 
 export function RecipeCard({ recipe, onClick, className }: Props) {
-  const imgSrc = getRecipeImage(recipe);
-
   return (
     <div
       className={`rounded-lg border overflow-hidden hover:shadow-md transition ${className || ""}`}
@@ -23,9 +18,9 @@ export function RecipeCard({ recipe, onClick, className }: Props) {
       role={onClick ? "button" : undefined}
     >
       <div className="relative h-40 w-full">
-        {/* Mantém exatamente o mesmo layout/estética */}
+        {/* Se quiser, troque para <img src=...> para simplificar */}
         <Image
-          src={imgSrc}
+          src={recipe.image}
           alt={recipe.title}
           fill
           sizes="100vw"

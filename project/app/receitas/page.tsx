@@ -2,9 +2,9 @@
  * Recipes list page
  * Página de lista de receitas
  */
+
 'use client'
 
-import Link from 'next/link'
 import { useState } from 'react'
 import { Header } from '@/components/layout/header'
 import { RecipeCard } from '@/components/recipe/recipe-card'
@@ -12,26 +12,7 @@ import { Button } from '@/components/ui/button'
 import { mockRecipes } from '@/lib/mock-data'
 import { useAppStore } from '@/lib/store'
 
-const categories = [
-  'Todas',
-  'Brasileira',
-  'Italiana',
-  'Japonesa',
-  'Coreana',
-  'Argentina',
-  'Mexicana',
-  'Francesa',
-  'Chinesa',
-  'Portuguesa',
-  'Mediterrânea',
-  'Árabe',
-  'Tailandesa',
-  'Indiana',
-  'Espanhola',
-  'Peruana',
-  'Doces',
-  'Saladas',
-]
+const categories = ['Todas', 'Brasileira', 'Italiana', 'Japonesa', 'Mexicana', 'Francesa', 'Doces', 'Saladas']
 
 export default function RecipesPage() {
   const { searchQuery } = useAppStore()
@@ -39,25 +20,22 @@ export default function RecipesPage() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
 
   // Filter recipes / Filtrar receitas
-  const filteredRecipes = mockRecipes.filter((recipe) => {
-    const q = (searchQuery ?? '').toLowerCase()
-    const matchesSearch =
-      !q ||
-      recipe.title.toLowerCase().includes(q) ||
-      recipe.description.toLowerCase().includes(q) ||
-      recipe.tags.some((tag) => tag.toLowerCase().includes(q))
-
-    const matchesCategory =
-      selectedCategory === 'Todas' || recipe.category === selectedCategory
-
+  const filteredRecipes = mockRecipes.filter(recipe => {
+    const matchesSearch = !searchQuery || 
+      recipe.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      recipe.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      recipe.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+    
+    const matchesCategory = selectedCategory === 'Todas' || recipe.category === selectedCategory
+    
     return matchesSearch && matchesCategory
   })
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header title="Todas as Receitas" />
-
-      <div className="px-4 pb-24">
+      
+      <div className="px-4 pb-6">
         <div className="max-w-md mx-auto">
           {/* Category filters / Filtros de categoria */}
           <div className="mb-6">
@@ -79,10 +57,9 @@ export default function RecipesPage() {
           {/* Results count / Contagem de resultados */}
           <div className="flex items-center justify-between mb-4">
             <p className="text-sm text-gray-600">
-              {filteredRecipes.length} receita
-              {filteredRecipes.length !== 1 ? 's' : ''}
+              {filteredRecipes.length} receita{filteredRecipes.length !== 1 ? 's' : ''}
             </p>
-
+            
             <div className="flex gap-1">
               <Button
                 variant={viewMode === 'grid' ? 'default' : 'ghost'}
@@ -105,27 +82,13 @@ export default function RecipesPage() {
           {viewMode === 'grid' ? (
             <div className="grid grid-cols-2 gap-3">
               {filteredRecipes.map((recipe) => (
-                <Link
-                  key={recipe.id}
-                  href={`/receitas/${recipe.slug}`}
-                  prefetch
-                  className="block"
-                >
-                  <RecipeCard recipe={recipe} />
-                </Link>
+                <RecipeCard key={recipe.id} recipe={recipe} />
               ))}
             </div>
           ) : (
             <div className="space-y-3">
               {filteredRecipes.map((recipe) => (
-                <Link
-                  key={recipe.id}
-                  href={`/receitas/${recipe.slug}`}
-                  prefetch
-                  className="block"
-                >
-                  <RecipeCard recipe={recipe} variant="horizontal" />
-                </Link>
+                <RecipeCard key={recipe.id} recipe={recipe} variant="horizontal" />
               ))}
             </div>
           )}

@@ -2,54 +2,41 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Search, ListChecks, ChefHat, User } from 'lucide-react'
+import { Home, Search, List, Wallet, User2 } from 'lucide-react'
 
-const ROUTES = {
-  HOME: '/',
-  RECEITAS: '/receitas',
-  LISTA: '/lista',
-  BUSCAR: '/buscar',
-  PROMOCOES: '/promocoes',
-  PERFIL: '/perfil', // ajuste para /login se preferir
-}
-
-type Item = {
-  href: string
-  label: string
-  icon: React.ReactNode
-  activeTest: (path: string) => boolean
-}
+const items = [
+  { href: '/', label: 'Início', Icon: Home },
+  { href: '/buscar', label: 'Buscar', Icon: Search },
+  { href: '/lista', label: 'Lista', Icon: List },
+  { href: '/gastos', label: 'Controle', Icon: Wallet },
+  { href: '/perfil', label: 'Perfil', Icon: User2 },
+]
 
 export default function BottomNav() {
   const pathname = usePathname()
 
-  const items: Item[] = [
-    { href: ROUTES.HOME,      label: 'Início',   icon: <Home size={22} />,       activeTest: p => p === '/' },
-    { href: ROUTES.BUSCAR,    label: 'Buscar',   icon: <Search size={22} />,     activeTest: p => p.startsWith('/buscar') },
-    { href: ROUTES.LISTA,     label: 'Lista',    icon: <ListChecks size={22} />, activeTest: p => p.startsWith('/lista') },
-    { href: ROUTES.RECEITAS,  label: 'Receitas', icon: <ChefHat size={22} />,    activeTest: p => p.startsWith('/receitas') },
-    { href: ROUTES.PERFIL,    label: 'Perfil',   icon: <User size={22} />,       activeTest: p => p.startsWith('/perfil') || p.startsWith('/login') },
-  ]
-
   return (
-    <nav
-      role="navigation"
-      aria-label="Navegação inferior"
-      className="fixed bottom-0 inset-x-0 z-50 bg-background/80 backdrop-blur border-t"
-    >
-      <ul className="grid grid-cols-5">
-        {items.map((it) => {
-          const active = it.activeTest(pathname)
+    <nav className="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-t">
+      <ul className="mx-auto flex max-w-md items-stretch justify-between">
+        {items.map(({ href, label, Icon }) => {
+          const active =
+            href === '/'
+              ? pathname === '/'
+              : pathname.startsWith(href)
           return (
-            <li key={it.href} className="relative">
+            <li key={href} className="flex-1">
               <Link
-                href={it.href}
-                className={`flex flex-col items-center justify-center py-2 select-none
-                  ${active ? 'text-primary' : 'text-muted-foreground'}`}
+                href={href}
+                prefetch
                 aria-current={active ? 'page' : undefined}
+                className={`flex h-16 flex-col items-center justify-center gap-1 text-sm ${
+                  active ? 'text-rose-600' : 'text-gray-600'
+                }`}
               >
-                {it.icon}
-                <span className="text-[11px] leading-none mt-1">{it.label}</span>
+                <Icon
+                  className={`h-5 w-5 ${active ? 'stroke-rose-600' : 'stroke-gray-600'}`}
+                />
+                <span className="leading-none">{label}</span>
               </Link>
             </li>
           )
