@@ -1,113 +1,113 @@
-/**
- * Search page
- * Página de busca
- */
-
 'use client'
 
-import { useState, useMemo } from 'react'
-import { Header } from '@/components/layout/header'
+import Link from 'next/link'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { ArrowLeft, Loader2 } from 'lucide-react'
+import BottomNav from '@/components/layout/bottom-nav'
+import { mockRecipes } from '@/lib/mock-data'
 import { RecipeCard } from '@/components/recipe/recipe-card'
-import { Button } from '@/components/ui/button'
-import { mockRecipes, searchRecipes } from '@/lib/mock-data'
-import { useAppStore } from '@/lib/store'
 
-const categories = ['Todas', 'Brasileira', 'Italiana', 'Japonesa', 'Mexicana', 'Francesa', 'Doces', 'Saladas']
-const difficulties = ['Todas', 'Fácil', 'Médio', 'Difícil']
+const PAGE_SIZE = 12 // quantos itens por “lote”
 
 export default function SearchPage() {
-  const { searchQuery, selectedCategory, selectedDifficulty, setSelectedCategory, setSelectedDifficulty } = useAppStore()
-  const [activeCategory, setActiveCategory] = useState('Todas')
-  const [activeDifficulty, setActiveDifficulty] = useState('Todas')
+  const router = useRouter()
+  const [query, setQuery] = useState('')
+  const [page, setPage] = useState(1)
+  const sentinelRef = useRef<HTMLDivElement | null>(null)
 
-  // Filter recipes based on search and filters / Filtrar receitas baseado na busca e filtros
+  // filtra todas as receitas do app
   const filteredRecipes = useMemo(() => {
-    let recipes = mockRecipes
+    const q = query.trim().toLowerCase()
+    if (!q) return mockRecipes
+    return mockRecipes.filter((r) =>
+      r.title.toLowerCase().includes(q) ||
+      r.description.toLowerCase().includes(q) ||
+      r.category.toLowerCase().includes(q) ||
+      r.tags.some((t) => t.toLowerCase().includes(q))
+    )
+  }, [query])
 
-    // Apply search query / Aplicar busca
-    if (searchQuery.trim()) {
-      recipes = searchRecipes(searchQuery)
-    }
+  // fatias visíveis + controle de “tem mais?”
+  const visible = filteredRecipes.slice(0, page * PAGE_SIZE)
+  const hasMore = visible.length < filteredRecipes.length
 
-    // Apply category filter / Aplicar filtro de categoria
-    if (activeCategory !== 'Todas') {
-      recipes = recipes.filter(recipe => recipe.category === activeCategory)
-    }
+  // ao mudar a busca, volta pra primeira página
+  useEffect(() => setPage(1), [query])
 
-    // Apply difficulty filter / Aplicar filtro de dificuldade
-    if (activeDifficulty !== 'Todas') {
-      recipes = recipes.filter(recipe => recipe.difficulty === activeDifficulty)
-    }
+  // infinite scroll: quando o sentinel entra em viewport, carrega mais
+  useEffect(() => {
+    if (!hasMore) return
+    const el = sentinelRef.current
+    if (!el) return
 
-    return recipes
-  }, [searchQuery, activeCategory, activeDifficulty])
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setPage((p) => p + 1)
+        }
+      },
+      { rootMargin: '200px' }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [hasMore, visible.length])
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header title="Buscar Receitas" />
-      
-      <div className="px-4 pb-6">
-        <div className="max-w-md mx-auto">
-          {/* Category filters / Filtros de categoria */}
-          <div className="mb-4">
-            <h3 className="text-sm font-medium text-gray-700 mb-2">Categorias</h3>
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  variant={activeCategory === category ? 'default' : 'outline'}
-                  size="sm"
-                  className="whitespace-nowrap"
-                  onClick={() => setActiveCategory(category)}
-                >
-                  {category}
-                </Button>
-              ))}
-            </div>
-          </div>
+    <div className="min-h-screen bg-gray-50 pb-24">
+      {/* Top bar: voltar + campo de busca */}
+      <div className="sticky top-0 z-40 bg-gray-50/80 backdrop-blur">
+        <div className="mx-auto max-w-md px-4 py-3 flex items-center gap-2">
+          <button
+            onClick={() => router.back()}
+            aria-label="Voltar"
+            className="rounded-lg border bg-white px-2 py-2 hover:bg-white/90"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Buscar receitas"
+            className="flex-1 rounded-lg border bg-white/90 px-3 py-2"
+          />
+        </div>
+      </div>
 
-          {/* Difficulty filters / Filtros de dificuldade */}
-          <div className="mb-6">
-            <h3 className="text-sm font-medium text-gray-700 mb-2">Dificuldade</h3>
-            <div className="flex gap-2">
-              {difficulties.map((difficulty) => (
-                <Button
-                  key={difficulty}
-                  variant={activeDifficulty === difficulty ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setActiveDifficulty(difficulty)}
-                >
-                  {difficulty}
-                </Button>
-              ))}
-            </div>
-          </div>
+      <div className="px-4">
+        <div className="mx-auto max-w-md">
+          <p className="mb-3 text-sm text-gray-600">
+            {filteredRecipes.length} resultado{filteredRecipes.length !== 1 ? 's' : ''}
+          </p>
 
-          {/* Results / Resultados */}
-          <div className="mb-4">
-            <p className="text-sm text-gray-600">
-              {filteredRecipes.length} receita{filteredRecipes.length !== 1 ? 's' : ''} encontrada{filteredRecipes.length !== 1 ? 's' : ''}
-            </p>
-          </div>
-
-          {/* Recipe grid / Grade de receitas */}
           <div className="grid grid-cols-2 gap-3">
-            {filteredRecipes.map((recipe) => (
-              <RecipeCard key={recipe.id} recipe={recipe} />
+            {visible.map((recipe) => (
+              <Link key={recipe.id} href={`/receitas/${recipe.slug}`} prefetch className="block">
+                <RecipeCard recipe={recipe} />
+              </Link>
             ))}
           </div>
 
-          {/* No results / Sem resultados */}
-          {filteredRecipes.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-gray-500 mb-2">Nenhuma receita encontrada</p>
-              <p className="text-sm text-gray-400">
-                Tente ajustar os filtros ou buscar por outros termos
-              </p>
+          {/* sentinel do infinite scroll */}
+          {hasMore && (
+            <div ref={sentinelRef} className="flex items-center justify-center py-6">
+              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              <span className="text-sm text-gray-500">Carregando mais...</span>
             </div>
+          )}
+
+          {!hasMore && filteredRecipes.length > 0 && (
+            <div className="py-8 text-center text-sm text-gray-400">Você chegou ao fim 😊</div>
+          )}
+
+          {filteredRecipes.length === 0 && (
+            <div className="py-16 text-center text-gray-400">Nenhuma receita encontrada</div>
           )}
         </div>
       </div>
+
+      <BottomNav />
     </div>
   )
 }
