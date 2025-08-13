@@ -2,8 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function SpecialDateBanner() {
-  // Se quiser trocar o valor do selinho, muda aqui:
-  const ctaBadge = "49";
+  const ctaBadge = "49"; // valor do selinho no botão
 
   return (
     <section className="rounded-2xl bg-white shadow-sm ring-1 ring-black/5">
@@ -35,10 +34,10 @@ export default function SpecialDateBanner() {
           </div>
         </div>
 
-        {/* Imagem (já existe no projeto) */}
+        {/* Imagem */}
         <div className="relative aspect-[4/3] sm:aspect-[3/2]">
           <Image
-            src="/images/banners/churrasco.jpg" // mantém o path que você já tem
+            src="/images/banners/churrasco.jpg" // mantém o path existente
             alt="Picanha grelhada com acompanhamentos"
             fill
             priority
