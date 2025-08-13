@@ -1,0 +1,21 @@
+{
+  "pais": "Coreia do Norte",
+  "total": 33,
+  "pageSize": 250,
+  "parts": ["part-001.ndjson", "part-002.ndjson", "part-003.ndjson", "part-004.ndjson"],
+  "by_region": {
+    "Pyongyang": 8,
+    "Hamhung": 7,
+    "Kaesong": 6,
+    "Wonsan": 5,
+    "Chongjin": 7
+  },
+  "by_category": {
+    "Prato Principal": 24,
+    "Acompanhamento": 4,
+    "Lanche": 3,
+    "Sobremesa": 2,
+    "Bebida": 0
+  },
+  "sample_titles": ["Pyongyang Naengmyeon", "Hamhung Naengmyeon", "Kaesong Bulgogi"]
+}

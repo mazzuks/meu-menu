@@ -1,0 +1,16 @@
+{
+  "countries": [
+    {"pais": "Brasil", "total": 1000},
+    {"pais": "Itália", "total": 1000},
+    {"pais": "Estados Unidos", "total": 1000},
+    {"pais": "Japão", "total": 1000},
+    {"pais": "México", "total": 1000},
+    {"pais": "França", "total": 1000},
+    {"pais": "Japão", "total": 1000},
+    {"pais": "Coreia do Sul", "total": 1000},
+    {"pais": "Coreia do Norte", "total": 33},
+    {"pais": "Espanha", "total": 1000},
+    {"pais": "Argentina", "total": 1000},
+    {"pais": "Canadá", "total": 1000}
+  ]
+}

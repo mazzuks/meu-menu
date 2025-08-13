@@ -1,0 +1,19 @@
+{
+  "pais": "Turquia",
+  "total": 10,
+  "pageSize": 10,
+  "parts": ["part-001.ndjson"],
+  "by_region": {
+    "Istambul": 3,
+    "Anatólia": 3,
+    "Egeu": 2,
+    "Mediterrâneo": 2
+  },
+  "by_category": {
+    "Prato Principal": 6,
+    "Acompanhamento": 2,
+    "Lanche": 1,
+    "Sobremesa": 1
+  },
+  "sample_titles": ["Kebab", "Dolma", "Turkish Delight"]
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "id": "1",
+    "title": "Pizza Margherita em 60 segundos",
+    "description": "Aprenda a fazer a pizza italiana mais famosa do mundo!",
+    "thumbUrl": "https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "videoUrl": "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4",
+    "tags": ["pizza", "italiana", "rápido", "vegetariana"],
+    "duration": 60,
+    "views": 12500,
+    "likes": 890,
+    "startsAt": "07-10",
+    "endsAt": "07-12"
+  },
+  {
+    "id": "2",
+    "title": "Feijoada do Zero - Receita Completa",
+    "description": "Feijoada tradicional brasileira passo a passo",
+    "thumbUrl": "https://images.pexels.com/photos/5737241/pexels-photo-5737241.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "videoUrl": "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_2mb.mp4",
+    "tags": ["feijoada", "brasileira", "tradicional", "fim de semana"],
+    "duration": 180,
+    "views": 25600,
+    "likes": 1850,
+    "startsAt": "01-01",
+    "endsAt": "12-31"
+  },
+  {
+    "id": "3",
+    "title": "Churrasco Perfeito - Dicas do Pitmaster",
+    "description": "Segredos para um churrasco inesquecível",
+    "thumbUrl": "https://images.pexels.com/photos/1251208/pexels-photo-1251208.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "videoUrl": "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4",
+    "tags": ["churrasco", "carne", "dicas", "fim de semana"],
+    "duration": 120,
+    "views": 18900,
+    "likes": 1420,
+    "startsAt": "04-24",
+    "endsAt": "08-11"
+  },
+  {
+    "id": "4",
+    "title": "Brigadeiro Gourmet - 3 Variações",
+    "description": "Transforme o brigadeiro tradicional em uma sobremesa gourmet",
+    "thumbUrl": "https://images.pexels.com/photos/1055272/pexels-photo-1055272.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "videoUrl": "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4",
+    "tags": ["brigadeiro", "doce", "gourmet", "festa"],
+    "duration": 90,
+    "views": 8750,
+    "likes": 650,
+    "startsAt": "10-12",
+    "endsAt": "12-25"
+  },
+  {
+    "id": "5",
+    "title": "Tiramisù Autêntico - Receita Italiana",
+    "description": "A verdadeira receita italiana do tiramisù",
+    "thumbUrl": "https://images.pexels.com/photos/6880219/pexels-photo-6880219.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "videoUrl": "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_2mb.mp4",
+    "tags": ["tiramisù", "italiano", "café", "sobremesa"],
+    "duration": 150,
+    "views": 15200,
+    "likes": 1100,
+    "startsAt": "06-12",
+    "endsAt": "12-25"
+  },
+  {
+    "id": "6",
+    "title": "Coxinha Caseira - Massa Perfeita",
+    "description": "Segredo da massa de coxinha que não racha",
+    "thumbUrl": "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "videoUrl": "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4",
+    "tags": ["coxinha", "salgado", "festa", "brasileira"],
+    "duration": 120,
+    "views": 22100,
+    "likes": 1680,
+    "startsAt": "02-13",
+    "endsAt": "06-24"
+  }
+]

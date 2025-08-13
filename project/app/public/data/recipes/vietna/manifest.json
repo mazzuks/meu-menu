@@ -1,0 +1,17 @@
+{
+  "pais": "Vietnã",
+  "total": 10,
+  "pageSize": 10,
+  "parts": ["part-001.ndjson"],
+  "by_region": {
+    "Norte": 4,
+    "Centro": 3,
+    "Sul": 3
+  },
+  "by_category": {
+    "Prato Principal": 6,
+    "Lanche": 3,
+    "Sobremesa": 1
+  },
+  "sample_titles": ["Pho Bo", "Banh Mi", "Bun Bo Hue"]
+}
