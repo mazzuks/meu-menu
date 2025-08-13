@@ -1,72 +1,47 @@
-/**
- * Bottom navigation component
- * Componente de navegação inferior
- */
-
 'use client'
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Search, List, PiggyBank, User } from 'lucide-react'
+import { Home, Search, List, Wallet, User2 } from 'lucide-react'
 
-const navItems = [
-  {
-    href: '/',
-    label: 'Início 🍽️',
-    icon: Home
-  },
-  {
-    href: '/buscar',
-    label: 'Buscar 🔍',
-    icon: Search
-  },
-  {
-    href: '/lista',
-    label: 'Lista 📝',
-    icon: List
-  },
-  {
-    href: '/gastos',
-    label: 'Controle de Gastos 🐷',
-    icon: PiggyBank
-  },
-  {
-    href: '/perfil',
-    label: 'Perfil 👤',
-    icon: User
-  }
+const items = [
+  { href: '/', label: 'Início', Icon: Home },
+  { href: '/buscar', label: 'Buscar', Icon: Search },
+  { href: '/lista', label: 'Lista', Icon: List },
+  { href: '/gastos', label: 'Controle', Icon: Wallet },
+  { href: '/perfil', label: 'Perfil', Icon: User2 },
 ]
 
 export default function BottomNav() {
   const pathname = usePathname()
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 safe-area-pb">
-      <div className="flex">
-        {navItems.map((item) => {
-          const Icon = item.icon
-          const isActive = pathname === item.href
-          
+    <nav className="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-t">
+      <ul className="mx-auto flex max-w-md items-stretch justify-between">
+        {items.map(({ href, label, Icon }) => {
+          const active =
+            href === '/'
+              ? pathname === '/'
+              : pathname.startsWith(href)
           return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex-1 flex flex-col items-center justify-center py-2 px-1 transition-colors ${
-                isActive 
-                  ? 'text-red-500 bg-red-50' 
-                  : 'text-gray-600 hover:text-red-500'
-              }`}
-              style={{ minHeight: '44px' }}
-              aria-label={item.label}
-            >
-              <Icon className="w-5 h-5 mb-1" />
-              <span className="text-xs font-medium leading-tight text-center">
-                {item.label}
-              </span>
-            </Link>
+            <li key={href} className="flex-1">
+              <Link
+                href={href}
+                prefetch
+                aria-current={active ? 'page' : undefined}
+                className={`flex h-16 flex-col items-center justify-center gap-1 text-sm ${
+                  active ? 'text-rose-600' : 'text-gray-600'
+                }`}
+              >
+                <Icon
+                  className={`h-5 w-5 ${active ? 'stroke-rose-600' : 'stroke-gray-600'}`}
+                />
+                <span className="leading-none">{label}</span>
+              </Link>
+            </li>
           )
         })}
-      </div>
+      </ul>
     </nav>
   )
 }

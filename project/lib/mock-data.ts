@@ -24,6 +24,13 @@ export interface Recipe {
   }
 }
 
+export interface Ingredient {
+  id: string
+  name: string
+  amount: string
+  unit: string
+}
+
 export interface ShoppingListItem {
   id: string
   name: string
@@ -624,38 +631,17 @@ export const mockRecipes: Recipe[] = [
   }
 ]
 
-    
-    recipe.ingredients.forEach(ingredient => {
-      const normalizedIngredient = ingredient.name
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .replace(/\d+/g, '')
-        .replace(/(kg|g|ml|l|un|unidade|unidades|dente|dentes|colher|colheres|xícara|xícaras|maço|maços|fatia|fatias|folha|folhas|cm)/gi, '')
-        .replace(/\s+/g, ' ')
-        .trim()
-      
-      // Check if ingredient matches any stock item / Verificar se ingrediente corresponde a algum item do estoque
-      const hasMatch = normalizedStock.some(stockItem => 
-        stockItem.includes(normalizedIngredient) || 
-        normalizedIngredient.includes(stockItem)
-      )
-      
-      if (hasMatch) {
-        score += 1
-      }
-    })
-    
-    return { recipe, score }
-  })
-  
-  // Return top recipes with score > 0 / Retornar receitas com pontuação > 0
-  return scoredRecipes
-    .filter(item => item.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, maxResults)
-    .map(item => item.recipe)
-}
+// Mock shopping list data / Dados mockados da lista de compras
+export const mockShoppingList: ShoppingListItem[] = [
+  { id: '1', name: 'Tomate', amount: '1', unit: 'kg', category: 'Hortifruti', purchased: false },
+  { id: '2', name: 'Cebola', amount: '500', unit: 'g', category: 'Hortifruti', purchased: true },
+  { id: '3', name: 'Arroz', amount: '1', unit: 'kg', category: 'Grãos', purchased: false },
+  { id: '4', name: 'Frango', amount: '1', unit: 'kg', category: 'Carnes', purchased: false },
+  { id: '5', name: 'Leite', amount: '1', unit: 'litro', category: 'Laticínios', purchased: true }
+]
+
+// Mock expenses data / Dados mockados de gastos
+export const mockExpenses: Expense[] = [
   { id: '1', description: 'Supermercado ABC', amount: 127.50, category: 'Alimentação', date: '2025-01-02' },
   { id: '2', description: 'Padaria do João', amount: 15.80, category: 'Padaria', date: '2025-01-02' },
   { id: '3', description: 'Feira livre', amount: 45.20, category: 'Hortifruti', date: '2025-01-01' },
