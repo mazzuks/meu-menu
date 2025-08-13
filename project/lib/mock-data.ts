@@ -1,3 +1,37 @@
+// lib/mock-data.ts
+
+export type Ingredient = {
+  id: string;
+  name: string;
+  amount: string; // manter como string: '2', '300', '1.5' etc.
+  unit: string;
+};
+
+export type Nutrition = {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+};
+
+export type Recipe = {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  image: string;
+  prepTime: number;
+  difficulty: 'Fácil' | 'Médio' | 'Difícil' | string;
+  servings: number;
+  category: string;
+  tags: string[];
+  ingredients: Ingredient[];
+  instructions: string[];
+  nutrition: Nutrition;
+};
+
+// ---> SEUS ITENS (21–32) <---
+export const mockRecipes: Recipe[] = [
   {
     id: '21',
     slug: 'bibimbap',
@@ -130,7 +164,7 @@
   },
   {
     id: '26',
-    slug: 'chow-mein-frango',
+    slug: 'chow-mein-franco',
     title: 'Chow Mein de Frango',
     description: 'Macarrão frito chinês com legumes e frango',
     image: 'https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -309,4 +343,7 @@
       'Sirva gelado'
     ],
     nutrition: { calories: 240, protein: 28, carbs: 10, fat: 8 }
-  },
+  }
+];
+
+export default mockRecipes;
