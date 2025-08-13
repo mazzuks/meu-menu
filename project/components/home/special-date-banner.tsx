@@ -1,20 +1,21 @@
 import Image from 'next/image'
 
-export default function SpecialDateBanner() {
+export const SpecialDateBanner = () => {
   return (
     <div className="rounded-lg border p-4 flex flex-col sm:flex-row gap-4">
-      {/* Imagem */}
+      {/* Imagem fixa do churrasco */}
       <div className="flex-shrink-0">
         <Image
           src="https://images.pexels.com/photos/1251208/pexels-photo-1251208.jpeg?auto=compress&cs=tinysrgb&w=800"
-          alt="Churrasco Picanha"
+          alt="Churrasco de picanha"
           width={200}
           height={200}
           className="rounded-lg object-cover"
+          priority
         />
       </div>
 
-      {/* Texto e Botões */}
+      {/* Texto e único botão */}
       <div className="flex flex-col justify-between">
         <div>
           <p className="text-xs font-medium text-gray-500">HOJE É DIA DE</p>
