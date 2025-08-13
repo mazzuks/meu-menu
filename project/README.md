@@ -1,4 +1,4 @@
-# Meu Menu 🤖
+# Platto 🤖
 
 Seu assistente culinário inteligente que transforma suas compras em receitas deliciosas!!
 
